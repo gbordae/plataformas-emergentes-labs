@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis postulaciones - Súmate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FBF8F1;
+      color: #473C33;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-rounded.filled {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Reglas inviolables de contraste y estilo */
+    .bg-sage { background-color: #ABC270; }
+    .bg-sage-tonal { background-color: #EEF3DC; }
+    .text-cafe { color: #473C33; }
+    .text-secondary { color: #6B5F54; }
+    .border-warm { border-color: #E5E0D3; }
+    .bg-mustard { background-color: #FEC868; }
+    .bg-coral { background-color: #FDA769; }
+    
+    /* Estados de postulación */
+    .state-aceptada {
+      background-color: #E3EFCB;
+      color: #2F6B2F;
+    }
+    .state-enviada {
+      background-color: #FFF0CF;
+      color: #7A5200;
+      border: 1px solid #7A5200;
+    }
+    .state-rechazada {
+      background-color: #FBE3DC;
+      color: #A8321F;
+    }
+
+    /* Cards e interacciones */
+    .postulacion-card {
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .postulacion-card:hover {
+      border-color: #473C33 !important;
+      box-shadow: 0 4px 14px rgba(71, 60, 51, 0.08);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body class="flex min-h-screen">
+
+  <!-- ==================== RIEL LATERAL FIJO (240px) ==================== -->
+  <aside class="w-[240px] shrink-0 min-h-screen bg-white border-r border-[#E5E0D3] flex flex-col justify-between fixed top-0 bottom-0 left-0 z-40">
+    <div class="p-6">
+      <!-- Marca Súmate -->
+      <div class="flex items-center gap-2 mb-8">
+        <div class="text-2xl font-extrabold tracking-tight text-[#473C33] flex items-baseline">
+          S<span class="text-[#FDA769]">ú</span>mate
+        </div>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-[#F5F3EC] text-[#6B5F54] border border-[#E5E0D3]">
+          Arequipa
+        </span>
+      </div>
+
+      <!-- Navegación -->
+      <nav class="space-y-1">
+        <!-- Explorar -->
+        <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-full text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors font-medium text-sm">
+          <span class="material-symbols-rounded text-[22px]">explore</span>
+          <span class="">Explorar</span>
+        </a>
+
+        <!-- Postulaciones (ACTIVO) -->
+        <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-full bg-[#EEF3DC] text-[#473C33] font-bold text-sm">
+          <span class="material-symbols-rounded filled text-[22px] text-[#473C33]">assignment_turned_in</span>
+          <span class="">Postulaciones</span>
+        </a>
+
+        <!-- Mis eventos -->
+        <a href="#" class="flex items-center justify-between px-3.5 py-2.5 rounded-full text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors font-medium text-sm">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-rounded text-[22px]">event</span>
+            <span class="">Mis eventos</span>
+          </div>
+          <span class="bg-[#FDA769] text-[#473C33] text-xs font-bold px-2 py-0.5 rounded-full">5</span>
+        </a>
+
+        <!-- Perfil -->
+        <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-full text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors font-medium text-sm">
+          <span class="material-symbols-rounded text-[22px]">person</span>
+          <span class="">Perfil</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bloque de usuario al pie -->
+    <div class="p-4 border-t border-[#E5E0D3] flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-[#EEF3DC] text-[#473C33] font-bold flex items-center justify-center border border-[#ABC270] text-sm shrink-0">
+        CQ
+      </div>
+      <div class="overflow-hidden">
+        <p class="text-sm font-bold text-[#473C33] truncate leading-tight">Camila Quispe</p>
+        <p class="text-xs text-[#6B5F54] truncate">Estudiante (UNSA)</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== ÁREA DE CONTENIDO PRINCIPAL ==================== -->
+  <main class="ml-[240px] flex-1 min-h-screen flex flex-col bg-[#FBF8F1]">
+    
+    <!-- Header bar de escritorio con búsqueda/notificaciones -->
+    <header class="h-14 px-8 border-b border-[#E5E0D3] bg-white flex items-center justify-between">
+      <div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+        
+        
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="w-9 h-9 rounded-full flex items-center justify-center text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors">
+          <span class="material-symbols-rounded text-[20px]">search</span>
+        </button>
+        <button class="w-9 h-9 rounded-full flex items-center justify-center text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors relative">
+          <span class="material-symbols-rounded text-[20px]">notifications</span>
+          <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#FDA769]"></span>
+        </button>
+        <div class="w-8 h-8 rounded-full bg-[#EEF3DC] text-[#473C33] flex items-center justify-center text-xs font-bold border border-[#ABC270]">
+          CQ
+        </div>
+      </div>
+    </header>
+
+    <!-- Banda de Cabecera Institucional Verde Sabio (#ABC270) -->
+    <div class="bg-[#ABC270] px-8 pt-7 pb-8 rounded-b-[24px]">
+      <div class="max-w-[1120px] mx-auto">
+        <!-- Pastilla institucional -->
+        
+        <!-- Título y subtítulo -->
+        <h1 class="text-3xl font-extrabold text-[#473C33] tracking-tight">
+          Mis postulaciones
+        </h1>
+        <p class="text-base font-medium text-[#473C33] mt-1 opacity-90">
+          Sigue el estado de cada convocatoria
+        </p>
+      </div>
+    </div>
+
+    <!-- Contenido central de postulaciones -->
+    <div class="max-w-[1120px] mx-auto w-full px-8 py-6 flex-1">
+
+      <!-- Pestañas + Filtro de estado -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#E5E0D3] pb-0 mb-6 gap-4">
+        <!-- Pestañas Activas / Historial -->
+        <div class="flex items-center gap-8">
+          <!-- Pestaña Activas (Seleccionada) -->
+          <button class="relative py-3.5 text-base font-bold text-[#473C33] flex items-center gap-2 group focus:outline-none">
+            <span class="">Activas</span>
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-[#EEF3DC] text-[#473C33] border border-[#ABC270]">
+              4
+            </span>
+            <!-- Indicador inferior Café de 3px -->
+            <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#473C33] rounded-t-full"></span>
+          </button>
+
+          <!-- Pestaña Historial -->
+          <button class="relative py-3.5 text-base font-medium text-[#6B5F54] hover:text-[#473C33] transition-colors flex items-center gap-2 group focus:outline-none">
+            <span class="">Historial</span>
+            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-[#F5F3EC] text-[#6B5F54]">
+              8
+            </span>
+          </button>
+        </div>
+
+        <!-- Filtro desplegable "Estado: Todos" -->
+        <div class="flex items-center gap-2 pb-2 sm:pb-0">
+          <div class="relative inline-block text-left">
+            <button type="button" class="inline-flex items-center justify-between gap-3 bg-white px-3.5 py-2 rounded-xl border border-[#E5E0D3] text-sm font-semibold text-[#473C33] hover:border-[#473C33] transition-all shadow-sm">
+              <span class="flex items-center gap-1.5">
+                <span class="material-symbols-rounded text-[18px] text-[#6B5F54]">filter_list</span>
+                <span class="">Estado: <span class="font-bold text-[#473C33]">Todos</span></span>
+              </span>
+              <span class="material-symbols-rounded text-[18px] text-[#6B5F54]">expand_more</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen contextual rápido -->
+      <div class="mb-5 flex items-center justify-between text-xs font-semibold text-[#6B5F54]">
+        <span class="">4 postulaciones en curso</span>
+        <span class="flex items-center gap-1 text-[#6B5F54]">
+          <span class="material-symbols-rounded text-[16px]">info</span>
+          Las respuestas se actualizan en tiempo real por cada institución organizadora
+        </span>
+      </div>
+
+      <!-- LISTA DE POSTULACIONES (4 FILAS) -->
+      <div class="space-y-3.5">
+
+        <!-- ==================== FILA 1: HACKSAN (ACEPTADA) ==================== -->
+        <div class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-5 border-l-4 border-l-[#2F6B2F] flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer">
+          <!-- Columna 1: Información de convocatoria -->
+          <div class="flex-1 min-w-[280px]">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <h3 class="text-lg font-bold text-[#473C33] leading-snug">
+                HackSan 2026 – 3.ª edición
+              </h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-[#6B5F54] flex-wrap mt-0.5">
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">apartment</span>
+                Pabellón de Sistemas · UNSA
+              </span>
+              <span class="text-[#E5E0D3]">•</span>
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">calendar_today</span>
+                sáb 22 nov · 09:00 hrs
+              </span>
+            </div>
+          </div>
+
+          <!-- Columna 2: Chip de Rol -->
+          <div class="shrink-0 flex items-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E5E0D3] text-xs font-semibold text-[#473C33]">
+              <span class="material-symbols-rounded text-[16px]">front_hand</span>
+              Voluntario
+            </span>
+          </div>
+
+          <!-- Columna 3: Chip de Estado (ACEPTADA: check relleno + texto negrita, fondo #E3EFCB, texto #2F6B2F, sin borde) -->
+          <div class="shrink-0 flex items-center">
+            <span class="state-aceptada inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold">
+              <span class="material-symbols-rounded filled text-[16px]">check_circle</span>
+              ACEPTADA
+            </span>
+          </div>
+
+          <!-- Columna 4: Línea de contexto (Café 14px) -->
+          <div class="md:w-[260px] shrink-0 text-sm font-medium text-[#473C33]">
+            ¡Estás dentro! Te esperamos el sábado a las 8:30.
+          </div>
+
+          <!-- Columna 5: Chevron a la derecha -->
+          <div class="shrink-0 flex items-center justify-end text-[#6B5F54]">
+            <span class="material-symbols-rounded text-[22px]">chevron_right</span>
+          </div>
+        </div>
+
+        <!-- ==================== FILA 2: CICLO DE PONENCIAS (ENVIADA) ==================== -->
+        <div class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer">
+          <!-- Columna 1: Información de convocatoria -->
+          <div class="flex-1 min-w-[280px]">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <h3 class="text-lg font-bold text-[#473C33] leading-snug">
+                Ciclo de ponencias Innovación Sur
+              </h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-[#6B5F54] flex-wrap mt-0.5">
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">apartment</span>
+                Campus Umacollo · UCSM
+              </span>
+              <span class="text-[#E5E0D3]">•</span>
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">calendar_today</span>
+                vie 28 nov · 16:30 hrs
+              </span>
+            </div>
+          </div>
+
+          <!-- Columna 2: Chip de Rol -->
+          <div class="shrink-0 flex items-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E5E0D3] text-xs font-semibold text-[#473C33]">
+              <span class="material-symbols-rounded text-[16px]">confirmation_number</span>
+              Asistente
+            </span>
+          </div>
+
+          <!-- Columna 3: Chip de Estado (ENVIADA: reloj + texto, fondo #FFF0CF, texto e icono #7A5200, borde 1px #7A5200) -->
+          <div class="shrink-0 flex items-center">
+            <span class="state-enviada inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold">
+              <span class="material-symbols-rounded text-[16px]">schedule</span>
+              ENVIADA
+            </span>
+          </div>
+
+          <!-- Columna 4: Línea de contexto (Café 14px) + botón texto "Retirar postulación" -->
+          <div class="md:w-[260px] shrink-0 text-sm text-[#473C33] flex flex-col sm:flex-row md:flex-col lg:flex-row lg:items-center justify-between gap-2">
+            <span class="font-medium">En revisión por el organizador.</span>
+            <button class="text-xs font-bold text-[#473C33] underline hover:text-[#7A5200] transition-colors self-start shrink-0">
+              Retirar postulación
+            </button>
+          </div>
+
+          <!-- Columna 5: Chevron a la derecha -->
+          <div class="shrink-0 flex items-center justify-end text-[#6B5F54]">
+            <span class="material-symbols-rounded text-[22px]">chevron_right</span>
+          </div>
+        </div>
+
+        <!-- ==================== FILA 3: CAMPAÑA DE RECICLAJE (RECHAZADA) ==================== -->
+        <div class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer">
+          <!-- Columna 1: Información de convocatoria -->
+          <div class="flex-1 min-w-[280px]">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <h3 class="text-lg font-bold text-[#473C33] leading-snug">
+                Campaña de reciclaje Arequipa Limpia
+              </h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-[#6B5F54] flex-wrap mt-0.5">
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">apartment</span>
+                Campus Campiña · UCSP
+              </span>
+              <span class="text-[#E5E0D3]">•</span>
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">calendar_today</span>
+                dom 30 nov · 08:00 hrs
+              </span>
+            </div>
+          </div>
+
+          <!-- Columna 2: Chip de Rol -->
+          <div class="shrink-0 flex items-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E5E0D3] text-xs font-semibold text-[#473C33]">
+              <span class="material-symbols-rounded text-[16px]">front_hand</span>
+              Voluntario
+            </span>
+          </div>
+
+          <!-- Columna 3: Chip de Estado (RECHAZADA: cruz en círculo + texto, fondo #FBE3DC, texto e icono #A8321F, sin borde) -->
+          <div class="shrink-0 flex items-center">
+            <span class="state-rechazada inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold">
+              <span class="material-symbols-rounded text-[16px]">cancel</span>
+              RECHAZADA
+            </span>
+          </div>
+
+          <!-- Columna 4: Línea de contexto (Café 14px) -->
+          <div class="md:w-[260px] shrink-0 text-sm font-medium text-[#473C33]">
+            No fuiste seleccionado esta vez. Sigue explorando.
+          </div>
+
+          <!-- Columna 5: Chevron a la derecha -->
+          <div class="shrink-0 flex items-center justify-end text-[#6B5F54]">
+            <span class="material-symbols-rounded text-[22px]">chevron_right</span>
+          </div>
+        </div>
+
+        <!-- ==================== FILA 4: CONFERENCIA MUJERES EN TECNOLOGÍA (ENVIADA) ==================== -->
+        <div class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer">
+          <!-- Columna 1: Información de convocatoria -->
+          <div class="flex-1 min-w-[280px]">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <h3 class="text-lg font-bold text-[#473C33] leading-snug">
+                Conferencia abierta Mujeres en Tecnología
+              </h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-[#6B5F54] flex-wrap mt-0.5">
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">apartment</span>
+                Torre Arequipa · UTP
+              </span>
+              <span class="text-[#E5E0D3]">•</span>
+              <span class="flex items-center gap-1 font-medium">
+                <span class="material-symbols-rounded text-[16px] text-[#6B5F54]">calendar_today</span>
+                jue 4 dic · 18:00 hrs
+              </span>
+            </div>
+          </div>
+
+          <!-- Columna 2: Chip de Rol -->
+          <div class="shrink-0 flex items-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E5E0D3] text-xs font-semibold text-[#473C33]">
+              <span class="material-symbols-rounded text-[16px]">confirmation_number</span>
+              Asistente
+            </span>
+          </div>
+
+          <!-- Columna 3: Chip de Estado (ENVIADA: reloj + texto, fondo #FFF0CF, texto e icono #7A5200, borde 1px #7A5200) -->
+          <div class="shrink-0 flex items-center">
+            <span class="state-enviada inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold">
+              <span class="material-symbols-rounded text-[16px]">schedule</span>
+              ENVIADA
+            </span>
+          </div>
+
+          <!-- Columna 4: Línea de contexto (Café 14px) -->
+          <div class="md:w-[260px] shrink-0 text-sm font-medium text-[#473C33]">
+            En revisión por el organizador.
+          </div>
+
+          <!-- Columna 5: Chevron a la derecha -->
+          <div class="shrink-0 flex items-center justify-end text-[#6B5F54]">
+            <span class="material-symbols-rounded text-[22px]">chevron_right</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sugerencia / Pie orientativo -->
+      <div class="mt-8 p-4 rounded-xl bg-[#EEF3DC] border border-[#ABC270] flex items-center justify-between">
+        <div class="flex items-center gap-3 text-sm text-[#473C33]">
+          <span class="material-symbols-rounded filled text-[24px] text-[#473C33]">help_outline</span>
+          <span class="">¿Tienes dudas sobre los criterios de selección de una convocatoria? Consulta las bases oficiales o comunícate con el club responsable.</span>
+        </div>
+        <a href="#" class="px-4 py-2 rounded-xl bg-white border border-[#473C33] text-xs font-bold text-[#473C33] hover:bg-[#F5F3EC] transition-colors shrink-0">
+          Ver preguntas frecuentes
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+
+
+
+
+
+</body></html>

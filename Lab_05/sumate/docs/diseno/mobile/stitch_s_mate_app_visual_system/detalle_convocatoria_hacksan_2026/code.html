@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="es" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary": "#8f4d17", "on-surface": "#231a12", "on-primary-container": "#3d5008", "on-error-container": "#93000a", "on-surface-variant": "#45483b", "on-tertiary": "#ffffff", "tertiary-fixed": "#ffdcc6", "inverse-primary": "#b8d07c", "surface-dim": "#e8d7ca", "surface-container-highest": "#f1dfd2", "secondary-fixed": "#ffdeaa", "on-primary-fixed-variant": "#3b4d06", "inverse-surface": "#392e26", "surface-container": "#fdebde", "on-error": "#ffffff", "on-tertiary-fixed": "#301400", "on-secondary-fixed": "#271900", "surface-bright": "#fff8f5", "primary-fixed-dim": "#b8d07c", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "on-secondary-container": "#775300", "on-primary-fixed": "#151f00", "on-secondary-fixed-variant": "#5f4100", "on-secondary": "#ffffff", "outline-variant": "#c6c8b7", "outline": "#76796a", "error-container": "#ffdad6", "secondary-container": "#ffc969", "inverse-on-surface": "#ffeee1", "surface-tint": "#52651e", "tertiary-container": "#fba567", "surface-container-low": "#fff1e8", "on-background": "#231a12", "surface": "#fff8f5", "primary-fixed": "#d4ec95", "on-tertiary-container": "#753901", "surface-container-high": "#f7e5d8", "on-tertiary-fixed-variant": "#713700", "tertiary-fixed-dim": "#ffb785", "primary": "#52651e", "on-primary": "#ffffff", "surface-variant": "#f1dfd2", "secondary": "#7d5700", "background": "#fff8f5", "secondary-fixed-dim": "#f3be5f", "primary-container": "#abc270" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter": "1rem", "space-md": "1rem", "margin": "1.25rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "headline-lg": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["34px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-container"><main class="flex flex-col relative w-full bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Cabecera Superior en Verde Sabio #ABC270 (esquinas inferiores redondeadas 24px) -->
+<header class="w-full bg-[#ABC270] rounded-b-[24px] px-margin pt-space-md pb-space-lg shadow-sm flex flex-col gap-space-md">
+<!-- Fila superior de navegación y acciones rápidas -->
+<div class="flex items-center justify-between">
+<button aria-label="Volver a la lista" class="w-10 h-10 -ml-space-xs rounded-full flex items-center justify-center text-[#473C33] active:bg-[#473C33]/10 transition-colors" onclick="history.back()" type="button">
+<span class="material-symbols-rounded text-[24px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-space-xs"><button aria-label="Guardar convocatoria" class="w-10 h-10 rounded-full flex items-center justify-center text-[#473C33] active:bg-[#473C33]/10 transition-colors" id="btn-bookmark" type="button">
+<span class="material-symbols-rounded text-[24px]" id="bookmark-icon">bookmark_border</span>
+</button>
+<button aria-label="Compartir convocatoria" class="w-10 h-10 rounded-full flex items-center justify-center text-[#473C33] active:bg-[#473C33]/10 transition-colors" id="btn-share" type="button">
+<span class="material-symbols-rounded text-[22px]">share</span>
+</button>
+<div class="relative -mr-space-xs">
+<button aria-label="Más opciones" class="w-10 h-10 rounded-full flex items-center justify-center text-[#473C33] active:bg-[#473C33]/10 transition-colors" onclick="const menu = document.getElementById('more-options-menu'); menu.classList.toggle('hidden');" type="button">
+<span class="material-symbols-rounded text-[24px]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 top-full mt-1 w-52 bg-white rounded-[12px] shadow-lg border border-[#E5E0D3] py-1 z-50" id="more-options-menu">
+<button class="w-full px-4 py-2.5 flex items-center gap-2 text-left text-body-sm font-label-md text-[#473C33] active:bg-[#FBF8F1] transition-colors" onclick="document.getElementById('more-options-menu').classList.add('hidden'); showToast('Convocatoria reportada');" type="button">
+<span class="material-symbols-rounded text-[18px] text-[#473C33]">flag</span>
+<span class="">Reportar convocatoria</span>
+</button>
+</div>
+</div></div>
+</div>
+<!-- Etiqueta Píldora de Categoría en Acento Coral Suave #FDA769 -->
+<div class="flex items-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-[#FDA769] text-[#473C33] font-label-md text-label-md font-bold tracking-wide shadow-xs">
+        Hackathon
+      </span>
+</div>
+<!-- Título Principal y Organización -->
+<div class="flex flex-col gap-space-xs">
+<h1 class="text-[24px] leading-[30px] font-extrabold text-[#473C33] font-headline-md tracking-tight">
+        HackSan 2026 – 3.ª edición
+      </h1>
+
+</div>
+</header>
+<!-- Contenido Desplazable con margen inferior amplio para la barra fija -->
+<main class="flex flex-col px-margin pt-space-lg pb-[190px] gap-space-lg">
+<!-- Tarjeta Blanca de Datos Clave -->
+<section class="bg-surface-container-lowest rounded-[16px] p-space-md border border-[#E5E0D3] flex flex-col gap-space-md shadow-xs">
+<!-- Fecha y Hora -->
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-[#FBF8F1] flex items-center justify-center shrink-0 mt-0.5 text-[#473C33]">
+<span class="material-symbols-rounded text-[20px]">calendar_today</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-[#473C33] font-bold">Sábado 22 de noviembre de 2026</span>
+<span class="font-body-sm text-body-sm text-[#6B5F54]">09:00 a 18:00 hrs (GMT-5)</span>
+</div>
+</div>
+<!-- Ubicación y Modalidad -->
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-[#FBF8F1] flex items-center justify-center shrink-0 mt-0.5 text-[#473C33]">
+<span class="material-symbols-rounded text-[20px]">location_on</span>
+</div>
+<div class="flex flex-col gap-1.5 min-w-0">
+<span class="font-body-md text-body-md text-[#473C33] font-medium leading-snug">Auditorio de Ingeniería, UNSA, Arequipa</span>
+<div class="flex">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white border border-[#E5E0D3] text-[#473C33] font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-rounded text-[14px]">pin_drop</span>
+              Presencial
+            </span>
+</div>
+</div>
+</div>
+<!-- Divisor sutil -->
+<hr class="border-t border-[#E5E0D3] my-0">
+<!-- Cupos Disponibles -->
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-[#EEF3DC] flex items-center justify-center shrink-0 text-[#473C33]">
+<span class="material-symbols-rounded text-[20px]">group</span>
+</div>
+<p class="font-body-md text-body-md text-[#473C33] font-semibold">
+          12 cupos para voluntarios · 80 cupos para asistentes
+        </p>
+</div>
+</section>
+<!-- Aviso Destacado de Fecha Límite -->
+<section class="w-full bg-[#FFF0CF] border border-[#F3E0A5] rounded-[12px] px-space-md py-3 flex items-center gap-space-sm shadow-xs">
+<span class="material-symbols-rounded text-[#7A5200] text-[22px] shrink-0">schedule</span>
+<p class="font-label-lg text-label-lg text-[#7A5200] font-bold leading-tight">
+        Postula hasta el 15 de noviembre · quedan 3 días
+      </p>
+</section>
+<!-- Sección: Descripción -->
+<section class="flex flex-col gap-space-xs">
+<h2 class="text-[18px] leading-[24px] font-bold text-[#473C33] font-headline-sm">
+        Descripción
+      </h2>
+<p class="font-body-md text-body-md text-[#473C33] leading-[22px] font-normal">
+        Maratón de programación de 24 horas consecutivas donde estudiantes universitarios de Arequipa colaboran en equipos para idear y prototipar soluciones tecnológicas a problemáticas urbanas y de sostenibilidad. Contará con mentorías de expertos de la industria, talleres previos y premios para los mejores proyectos.
+      </p>
+</section>
+<!-- Sección: Beneficios -->
+<section class="flex flex-col gap-space-sm">
+<h2 class="text-[18px] leading-[24px] font-bold text-[#473C33] font-headline-sm">
+        Beneficios
+      </h2>
+<ul class="flex flex-col gap-[10px]">
+<li class="flex items-center gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-[#EEF3DC] flex items-center justify-center shrink-0 text-[#473C33]">
+<span class="material-symbols-rounded text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-[#473C33] font-medium">Constancia digital verificable</span>
+</li>
+<li class="flex items-center gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-[#EEF3DC] flex items-center justify-center shrink-0 text-[#473C33]">
+<span class="material-symbols-rounded text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-[#473C33] font-medium">Networking con empresas locales</span>
+</li>
+<li class="flex items-center gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-[#EEF3DC] flex items-center justify-center shrink-0 text-[#473C33]">
+<span class="material-symbols-rounded text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-[#473C33] font-medium">Refrigerio y kit del evento</span>
+</li>
+</ul>
+</section>
+<!-- Enlace Externo a Bases / Información Completa -->
+<a class="bg-surface-container-lowest border border-[#E5E0D3] rounded-[12px] px-space-md py-3 flex items-center justify-between active:bg-[#FBF8F1] transition-colors shadow-xs" href="#bases-convocatoria">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-rounded text-[#473C33] text-[20px]">link</span>
+<span class="font-label-lg text-label-lg text-[#473C33] font-semibold underline underline-offset-2">
+          Ver más información y bases
+        </span>
+</div>
+<span class="material-symbols-rounded text-[#6B5F54] text-[18px]">open_in_new</span>
+</a>
+<!-- Resumen de Requisitos Rápidos para Estudiantes -->
+<div class="bg-[#FBF8F1] rounded-[12px] p-space-md border border-[#E5E0D3] flex items-start gap-space-sm">
+<span class="material-symbols-rounded text-[#473C33] text-[20px] mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-[#6B5F54] leading-relaxed">
+        Postulación abierta para estudiantes regulares y egresados recientes de universidades o institutos de la región Arequipa.
+      </p>
+</div>
+</main>
+<!-- Barra Fija Inferior de Acciones (Bottom Action Bar) -->
+<aside class="fixed bottom-0 inset-x-0 bg-surface-container-lowest border-t border-[#E5E0D3] p-space-md pb-7 flex flex-col gap-space-sm z-40 shadow-[0_-4px_16px_rgba(71,60,51,0.06)]">
+<!-- Botón Principal: Voluntario -->
+<button class="w-full h-12 bg-[#FEC868] active:bg-[#E8B355] text-[#473C33] rounded-[12px] font-title-md text-title-md font-bold flex items-center justify-center gap-space-xs transition-colors shadow-xs" id="btn-apply-volunteer" type="button">
+<span class="material-symbols-rounded text-[20px]">volunteer_activism</span>
+<span class="">Postular como voluntario</span>
+</button>
+<!-- Botón Secundario: Asistente -->
+<button class="w-full h-12 bg-transparent border-[1.5px] border-[#473C33] active:bg-[#473C33]/5 text-[#473C33] rounded-[12px] font-title-md text-title-md font-bold flex items-center justify-center gap-space-xs transition-colors" id="btn-apply-attendee" type="button">
+<span class="material-symbols-rounded text-[20px]">confirmation_number</span>
+<span class="">Registrarme como asistente</span>
+</button>
+</aside>
+<!-- Modal / Toast de Retroalimentación de Interacción -->
+<div class="fixed bottom-36 left-1/2 -translate-x-1/2 bg-[#473C33] text-[#FBF8F1] px-4 py-2.5 rounded-full text-body-sm font-label-md flex items-center gap-2 shadow-lg transition-opacity duration-300 z-50 max-w-[90%] text-center opacity-0 pointer-events-none" id="toast-notification">
+<span class="material-symbols-rounded text-[18px] text-[#ABC270]">check_circle</span>
+<span id="toast-message" class="">Iniciando registro de asistente...</span>
+</div>
+</div>
+<script>
+  // Micro-interacciones locales para feedback visual instantáneo
+  const bookmarkBtn = document.getElementById('btn-bookmark');
+  const bookmarkIcon = document.getElementById('bookmark-icon');
+  const shareBtn = document.getElementById('btn-share');
+  const volunteerBtn = document.getElementById('btn-apply-volunteer');
+  const attendeeBtn = document.getElementById('btn-apply-attendee');
+  const toast = document.getElementById('toast-notification');
+  const toastMsg = document.getElementById('toast-message');
+
+  function showToast(text) {
+    if (!toast || !toastMsg) return;
+    toastMsg.textContent = text;
+    toast.classList.remove('opacity-0', 'pointer-events-none');
+    toast.classList.add('opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+    }, 2400);
+  }
+
+  if (bookmarkBtn && bookmarkIcon) {
+    let saved = false;
+    bookmarkBtn.addEventListener('click', () => {
+      saved = !saved;
+      bookmarkIcon.textContent = saved ? 'bookmark' : 'bookmark_border';
+      bookmarkIcon.style.fontVariationSettings = saved ? "'FILL' 1" : "'FILL' 0";
+      showToast(saved ? '¡Convocatoria guardada en tus favoritos!' : 'Eliminada de tus favoritos');
+    });
+  }
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: 'HackSan 2026 – 3.ª edición',
+          text: '¡Participa en el HackSan 2026 en la UNSA Arequipa!',
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        showToast('Enlace de la convocatoria copiado al portapapeles');
+      }
+    });
+  }
+
+  if (volunteerBtn) {
+    volunteerBtn.addEventListener('click', () => {
+      showToast('Iniciando postulación para voluntariado...');
+    });
+  }
+
+  if (attendeeBtn) {
+    attendeeBtn.addEventListener('click', () => {
+      showToast('Iniciando registro de asistente...');
+    });
+  }
+</script></main>
+
+</body></html>

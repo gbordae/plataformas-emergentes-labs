@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, height=844, initial-scale=1.0, user-scalable=no">
+  <title>Mis eventos - Súmate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FBF8F1;
+      color: #473C33;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      width: 390px;
+      min-height: 844px;
+      height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-rounded.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Hide scrollbar for clean mobile preview */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="relative flex flex-col justify-between bg-[#FBF8F1]">
+
+  <!-- Top App Bar / Civic Header -->
+  <header class="bg-[#ABC270] rounded-b-[24px] pt-7 pb-5 px-5 shadow-sm relative z-10 shrink-0">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf9f6]/30 border border-[#fbf9f6]/40 text-[#473C33] text-xs font-bold uppercase tracking-wider mb-2">
+  <span class="material-symbols-rounded text-sm">explore</span>
+  <span class="">SÚMATE AREQUIPA</span>
+</div>
+    <h1 class="text-[24px] font-extrabold text-[#473C33] leading-tight">Mis eventos</h1>
+    <p class="text-[13.5px] font-medium text-[#473C33] opacity-90 mt-0.5">Gestiona las convocatorias que publicaste</p>
+  </header>
+
+  <!-- Segmented Tabs (Material 3) -->
+  <nav class="bg-[#FBF8F1] border-b border-[#E5E0D3] shrink-0 sticky top-0 z-10">
+    <div class="grid grid-cols-2">
+      <button class="relative py-3.5 text-center font-bold text-[15px] text-[#473C33] flex items-center justify-center gap-1.5 focus:outline-none">
+        <span class="">Activos</span>
+        <span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full text-[11px] font-bold bg-[#EEF3DC] text-[#473C33]">3</span>
+        <div class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#473C33] rounded-t-full"></div>
+      </button>
+      <button class="relative py-3.5 text-center font-medium text-[15px] text-[#6B5F54] flex items-center justify-center gap-1.5 focus:outline-none hover:text-[#473C33]">
+        <span class="">Pasados</span>
+        <span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#E5E0D3]/60 text-[#6B5F54]">8</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Scrollable Events List -->
+  <main class="flex-1 overflow-y-auto px-4 py-4 space-y-3 pb-32">
+    
+    <!-- CARD 1: HackSan -->
+    <article class="bg-white rounded-[16px] border border-[#E5E0D3] p-4 shadow-none">
+      <!-- Fila superior: Tag + Menu -->
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FDA769] text-[#473C33] text-[12px] font-bold tracking-wide">
+          <span class="material-symbols-rounded text-[14px]">code</span>
+          Hackathon
+        </span>
+        <button type="button" aria-label="Opciones del evento HackSan" class="w-8 h-8 -mr-1 flex items-center justify-center rounded-full text-[#473C33] hover:bg-[#FBF8F1] active:scale-95 transition-all">
+          <span class="material-symbols-rounded text-[20px]">more_vert</span>
+        </button>
+      </div>
+
+      <!-- Título y subtítulo institucional -->
+      <h2 class="text-[18px] font-bold text-[#473C33] leading-snug">HackSan</h2>
+      <p class="text-[12.5px] font-normal text-[#6B5F54] mb-3">3 ediciones · Club de Sistemas · UNSA</p>
+
+      <!-- Bloque interior de la edición más reciente -->
+      <div class="bg-[#FBF8F1] rounded-[12px] p-3 space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <div class="text-[13.5px] font-semibold text-[#473C33]">3.ª edición 2026</div>
+            <div class="flex items-center gap-1 text-[12px] text-[#6B5F54] mt-0.5">
+              <span class="material-symbols-rounded text-[15px] text-[#6B5F54]">calendar_today</span>
+              <span class="">Sáb, 22 nov 2026</span>
+            </div>
+          </div>
+          <!-- Chip de Estado: CONVOCATORIA ABIERTA -->
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EEF3DC] border border-[#473C33] text-[#473C33] text-[11px] font-bold shrink-0">
+            <span class="material-symbols-rounded text-[13px] text-[#473C33]">lock_open</span>
+            Convocatoria abierta
+          </span>
+        </div>
+
+        <!-- Indicador de pendientes por revisar si existen -->
+        <div class="pt-0.5">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FDA769] text-[#473C33] text-[12px] font-bold">
+            <span class="material-symbols-rounded text-[15px]">move_to_inbox</span>
+            5 por revisar
+          </span>
+        </div>
+
+        <!-- Barra de progreso fina de cupos -->
+        <div class="space-y-1 pt-1">
+          <div class="flex justify-between items-center text-[12px] text-[#473C33] font-medium">
+            <span class="">6 de 12 voluntarios</span>
+            <span class="text-[#6B5F54]">·</span>
+            <span class="">40 de 80 asistentes</span>
+          </div>
+          <div class="w-full h-2 bg-[#E5E0D3] rounded-full overflow-hidden flex">
+            <!-- Voluntarios 50% -->
+            <div class="bg-[#ABC270] h-full" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila inferior de acciones -->
+      <div class="mt-3.5 pt-3 border-t border-[#E5E0D3] flex flex-col sm:flex-row items-center gap-2">
+        <button type="button" class="w-full h-[44px] rounded-[12px] border-[1.5px] border-[#473C33] bg-transparent text-[#473C33] font-bold text-[14px] flex items-center justify-center gap-2 hover:bg-[#473C33]/5 active:scale-[0.98] transition-all">
+          <span class="material-symbols-rounded text-[18px]">group</span>
+          Gestionar postulantes
+        </button>
+        <button type="button" class="py-1 px-2 text-[13px] font-semibold text-[#6B5F54] hover:text-[#473C33] underline self-center">
+          Ver ediciones
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 2: Ciclo de ponencias Innovación Sur -->
+    <article class="bg-white rounded-[16px] border border-[#E5E0D3] p-4 shadow-none">
+      <!-- Fila superior: Tag + Menu -->
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FDA769] text-[#473C33] text-[12px] font-bold tracking-wide">
+          <span class="material-symbols-rounded text-[14px]">record_voice_over</span>
+          Ponencia
+        </span>
+        <button type="button" aria-label="Opciones del evento Innovación Sur" class="w-8 h-8 -mr-1 flex items-center justify-center rounded-full text-[#473C33] hover:bg-[#FBF8F1] active:scale-95 transition-all">
+          <span class="material-symbols-rounded text-[20px]">more_vert</span>
+        </button>
+      </div>
+
+      <!-- Título y subtítulo institucional -->
+      <h2 class="text-[18px] font-bold text-[#473C33] leading-snug">Ciclo de ponencias Innovación Sur</h2>
+      <p class="text-[12.5px] font-normal text-[#6B5F54] mb-3">2 ediciones · Facultad de Producción y Servicios · UNSA</p>
+
+      <!-- Bloque interior de la edición más reciente -->
+      <div class="bg-[#FBF8F1] rounded-[12px] p-3 space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <div class="text-[13.5px] font-semibold text-[#473C33]">2.ª edición</div>
+            <div class="flex items-center gap-1 text-[12px] text-[#6B5F54] mt-0.5">
+              <span class="material-symbols-rounded text-[15px] text-[#6B5F54]">calendar_today</span>
+              <span class="">Vie, 28 nov 2026</span>
+            </div>
+          </div>
+          <!-- Chip de Estado: CONVOCATORIA ABIERTA -->
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EEF3DC] border border-[#473C33] text-[#473C33] text-[11px] font-bold shrink-0">
+            <span class="material-symbols-rounded text-[13px] text-[#473C33]">lock_open</span>
+            Convocatoria abierta
+          </span>
+        </div>
+
+        <!-- Sin pendientes por revisar -->
+
+        <!-- Barra de progreso fina de cupos -->
+        <div class="space-y-1 pt-1">
+          <div class="flex justify-between items-center text-[12px] text-[#473C33] font-medium">
+            <span class="">4 de 6 voluntarios</span>
+            <span class="text-[#6B5F54]">·</span>
+            <span class="">65 de 100 asistentes</span>
+          </div>
+          <div class="w-full h-2 bg-[#E5E0D3] rounded-full overflow-hidden flex">
+            <!-- Barra con progreso -->
+            <div class="bg-[#ABC270] h-full" style="width: 65%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila inferior de acciones -->
+      <div class="mt-3.5 pt-3 border-t border-[#E5E0D3] flex flex-col sm:flex-row items-center gap-2">
+        <button type="button" class="w-full h-[44px] rounded-[12px] border-[1.5px] border-[#473C33] bg-transparent text-[#473C33] font-bold text-[14px] flex items-center justify-center gap-2 hover:bg-[#473C33]/5 active:scale-[0.98] transition-all">
+          <span class="material-symbols-rounded text-[18px]">group</span>
+          Gestionar postulantes
+        </button>
+        <button type="button" class="py-1 px-2 text-[13px] font-semibold text-[#6B5F54] hover:text-[#473C33] underline self-center">
+          Ver ediciones
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 3: Arequipa Limpia -->
+    <article class="bg-white rounded-[16px] border border-[#E5E0D3] p-4 shadow-none">
+      <!-- Fila superior: Tag + Menu -->
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FDA769] text-[#473C33] text-[12px] font-bold tracking-wide">
+          <span class="material-symbols-rounded text-[14px]">volunteer_activism</span>
+          Campaña
+        </span>
+        <button type="button" aria-label="Opciones del evento Arequipa Limpia" class="w-8 h-8 -mr-1 flex items-center justify-center rounded-full text-[#473C33] hover:bg-[#FBF8F1] active:scale-95 transition-all">
+          <span class="material-symbols-rounded text-[20px]">more_vert</span>
+        </button>
+      </div>
+
+      <!-- Título y subtítulo institucional -->
+      <h2 class="text-[18px] font-bold text-[#473C33] leading-snug">Arequipa Limpia</h2>
+      <p class="text-[12.5px] font-normal text-[#6B5F54] mb-3">1 edición · Red Ambiental Universitaria</p>
+
+      <!-- Bloque interior de la edición más reciente -->
+      <div class="bg-[#FBF8F1] rounded-[12px] p-3 space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <div class="text-[13.5px] font-semibold text-[#473C33]">1.ª edición</div>
+            <div class="flex items-center gap-1 text-[12px] text-[#6B5F54] mt-0.5">
+              <span class="material-symbols-rounded text-[15px] text-[#6B5F54]">calendar_today</span>
+              <span class="">Dom, 30 nov 2026</span>
+            </div>
+          </div>
+          <!-- Chip de Estado: CERRADA (Cupos completos) -->
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E5E0D3] text-[#473C33] text-[11px] font-bold shrink-0">
+            <span class="material-symbols-rounded text-[13px] text-[#473C33]">lock</span>
+            Cerrada (Cupos llenos)
+          </span>
+        </div>
+
+        <!-- Barra de progreso completa -->
+        <div class="space-y-1 pt-1">
+          <div class="flex justify-between items-center text-[12px] text-[#473C33] font-medium">
+            <span class="">30 de 30 voluntarios</span>
+            <span class="text-[#6B5F54]">·</span>
+            <span class="">150 de 150 asistentes</span>
+          </div>
+          <div class="w-full h-2 bg-[#E5E0D3] rounded-full overflow-hidden flex">
+            <!-- Barra al 100% -->
+            <div class="bg-[#ABC270] h-full" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila inferior de acciones -->
+      <div class="mt-3.5 pt-3 border-t border-[#E5E0D3] flex flex-col sm:flex-row items-center gap-2">
+        <button type="button" class="w-full h-[44px] rounded-[12px] border-[1.5px] border-[#473C33] bg-transparent text-[#473C33] font-bold text-[14px] flex items-center justify-center gap-2 hover:bg-[#473C33]/5 active:scale-[0.98] transition-all">
+          <span class="material-symbols-rounded text-[18px]">group</span>
+          Gestionar postulantes
+        </button>
+        <button type="button" class="py-1 px-2 text-[13px] font-semibold text-[#6B5F54] hover:text-[#473C33] underline self-center">
+          Ver ediciones
+        </button>
+      </div>
+    </article>
+
+    <!-- Espacio adicional para no chocar con el FAB y barra de navegación -->
+    <div class="h-6"></div>
+  </main>
+
+  <!-- Extended Floating Action Button (FAB) -->
+  <aside class="fixed bottom-[84px] right-4 z-20">
+    <button type="button" class="h-[50px] px-5 rounded-full bg-[#FEC868] text-[#473C33] font-bold text-[14px] flex items-center gap-2 shadow-lg border border-[#E5E0D3]/80 hover:brightness-105 active:scale-95 transition-all">
+      <span class="material-symbols-rounded text-[22px] font-bold">add</span>
+      <span class="">Publicar evento</span>
+    </button>
+  </aside>
+
+  <!-- Bottom Navigation Bar (Material 3) con 4 destinos -->
+  <nav class="fixed bottom-0 left-0 right-0 max-w-[390px] mx-auto bg-white border-t border-[#E5E0D3] px-2 py-2 z-30 flex items-center justify-around shadow-[0_-2px_10px_rgba(71,60,51,0.04)]">
+    <!-- Destino 1: Explorar -->
+    <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-[#6B5F54] hover:text-[#473C33] transition-colors">
+      <span class="material-symbols-rounded text-[24px]">explore</span>
+      <span class="text-[11px] font-medium mt-1">Explorar</span>
+    </a>
+
+    <!-- Destino 2: Postulaciones -->
+    <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-[#6B5F54] hover:text-[#473C33] transition-colors">
+      <span class="material-symbols-rounded text-[24px]">assignment</span>
+      <span class="text-[11px] font-medium mt-1">Postulaciones</span>
+    </a>
+
+    <!-- Destino 3: Mis eventos (ACTIVO con Badge) -->
+    <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-[#473C33]">
+      <div class="relative inline-flex items-center justify-center px-4 py-1 rounded-full bg-[#EEF3DC]">
+        <span class="material-symbols-rounded fill-1 text-[24px] text-[#473C33]">event</span>
+        <!-- Badge Material 3 con 5 pendientes -->
+        <span class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#FDA769] text-[#473C33] text-[10.5px] font-extrabold flex items-center justify-center shadow-xs">
+          5
+        </span>
+      </div>
+      <span class="text-[11px] font-bold mt-1 text-[#473C33]">Mis eventos</span>
+    </a>
+
+    <!-- Destino 4: Perfil -->
+    <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-[#6B5F54] hover:text-[#473C33] transition-colors">
+      <span class="material-symbols-rounded text-[24px]">person</span>
+      <span class="text-[11px] font-medium mt-1">Perfil</span>
+    </a>
+  </nav>
+
+
+
+
+</body></html>

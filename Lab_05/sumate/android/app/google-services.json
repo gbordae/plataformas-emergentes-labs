@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "809550565598",
+    "project_id": "sumate-3f35e",
+    "storage_bucket": "sumate-3f35e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809550565598:android:6c7355394e8f456cf7b24f",
+        "android_client_info": {
+          "package_name": "com.example.sumate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmIOU5n8Wmi041Bc2ozlvlASmhOKwChmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

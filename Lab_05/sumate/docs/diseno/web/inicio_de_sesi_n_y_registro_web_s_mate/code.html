@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión - Súmate</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Material Symbols Outlined & Rounded -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#ABC270',
+              'primary-tonal': '#EEF3DC',
+              'primary-subtle': '#C3D48F',
+              secondary: '#FEC868',
+              accent: '#FDA769',
+              espresso: '#473C33',
+              secondaryText: '#6B5F54',
+              bg: '#FBF8F1',
+              surface: '#FFFFFF',
+              border: '#E5E0D3',
+              errorBg: '#FBE3DC',
+              errorText: '#A8321F'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #473C33;
+      background-color: #FBF8F1;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-rounded.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-row overflow-hidden bg-brand-bg select-none">
+
+  <!-- MITAD IZQUIERDA (50%): Panel verde institucional con formas orgánicas sutiles -->
+  <section class="relative w-1/2 h-full bg-[#ABC270] flex flex-col justify-between p-14 lg:p-16 overflow-hidden">
+    <!-- Formas orgánicas sutiles de fondo (#C3D48F) -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 720 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-50 120C120 80 240 260 160 420C80 580 -40 680 -10 820C10 920 180 940 280 880C420 800 480 920 620 860C720 820 740 650 710 520C670 340 550 400 460 280C360 140 260 -40 100 -20C-20 -5 -180 150 -50 120Z" fill="#C3D48F" fill-opacity="0.55"/>
+      <circle cx="580" cy="180" r="140" fill="#C3D48F" fill-opacity="0.4"/>
+      <circle cx="120" cy="820" r="210" fill="#C3D48F" fill-opacity="0.35"/>
+    </svg>
+
+    <!-- Pastilla institucional superior -->
+    <div class="relative z-10 flex items-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/35 backdrop-blur-sm border border-white/40 shadow-xs">
+        <span class="material-symbols-rounded text-[#473C33] text-[18px]">location_on</span>
+        <span class="text-xs font-bold tracking-wider text-[#473C33] uppercase">Arequipa · Plataforma Universitaria</span>
+      </div>
+    </div>
+
+    <!-- Bloque central con identidad y propuesta de valor -->
+    <div class="relative z-10 my-auto max-w-lg">
+      <!-- Logotipo Súmate -->
+      <div class="flex items-baseline">
+        <h1 class="text-[56px] leading-tight font-extrabold text-[#473C33] tracking-tight">
+          S<span class="text-[#FDA769]">ú</span>mate
+        </h1>
+      </div>
+
+      <!-- Lema -->
+      <p class="text-[20px] font-medium text-[#473C33] mt-2 mb-10 leading-relaxed">
+        Encuentra tu próxima oportunidad
+      </p>
+
+      <!-- Tres líneas de valor cívico y académico -->
+      <div class="space-y-4">
+        <!-- Beneficio 1 -->
+        <div class="flex items-center gap-4">
+          <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-black/5">
+            <span class="material-symbols-rounded fill-icon text-[#473C33] text-[20px]">check</span>
+          </div>
+          <span class="text-[16px] font-semibold text-[#473C33] leading-snug">
+            Un solo perfil, postula con un toque
+          </span>
+        </div>
+
+        <!-- Beneficio 2 -->
+        <div class="flex items-center gap-4">
+          <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-black/5">
+            <span class="material-symbols-rounded fill-icon text-[#473C33] text-[20px]">check</span>
+          </div>
+          <span class="text-[16px] font-semibold text-[#473C33] leading-snug">
+            Voluntario o asistente, tú eliges
+          </span>
+        </div>
+
+        <!-- Beneficio 3 -->
+        <div class="flex items-center gap-4">
+          <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-black/5">
+            <span class="material-symbols-rounded fill-icon text-[#473C33] text-[20px]">check</span>
+          </div>
+          <span class="text-[16px] font-semibold text-[#473C33] leading-snug">
+            Constancia digital para tu LinkedIn
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie del panel izquierdo institucional -->
+    <div class="relative z-10 flex items-center justify-between text-xs font-medium text-[#473C33]/80 pt-4 border-t border-[#473C33]/15">
+      <span>Convocatorias cívicas, académicas e institucionales</span>
+      <span class="font-bold tracking-wide">UNSA · UCSP · UCSM · UTP</span>
+    </div>
+  </section>
+
+  <!-- MITAD DERECHA (50%): Formulario centrado en fondo cálido #FBF8F1 -->
+  <main class="w-1/2 h-full bg-[#FBF8F1] flex items-center justify-center p-8 overflow-hidden relative">
+    
+    <!-- Tarjeta blanca centrada (440 px de ancho, radio 24 px, borde #E5E0D3, padding 32 px) -->
+    <div class="w-[440px] bg-white rounded-[24px] border border-[#E5E0D3] p-8 shadow-[0_4px_24px_rgba(71,60,51,0.04)] flex flex-col justify-between">
+      
+      <div>
+        <!-- Encabezado de la tarjeta -->
+        <div class="mb-5 text-center">
+          <h2 class="text-2xl font-extrabold text-[#473C33] tracking-tight">Bienvenido a Súmate</h2>
+          <p class="text-sm text-[#6B5F54] mt-1">Ingresa con tus credenciales universitarias</p>
+        </div>
+
+        <!-- Selector segmentado M3 (2 opciones) -->
+        <div class="grid grid-cols-2 p-1 bg-[#FBF8F1] rounded-2xl border border-[#E5E0D3] mb-6">
+          <!-- Opción 1: Iniciar sesión (Seleccionada) -->
+          <button type="button" class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-[12px] bg-[#ABC270] text-[#473C33] font-bold text-sm shadow-xs transition-all cursor-default">
+            <span class="material-symbols-rounded fill-icon text-[#473C33] text-[18px]">check</span>
+            <span>Iniciar sesión</span>
+          </button>
+
+          <!-- Opción 2: Crear cuenta (Inactiva) -->
+          <button type="button" class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-[12px] bg-transparent text-[#6B5F54] font-medium text-sm hover:text-[#473C33] hover:bg-white/60 transition-all">
+            <span>Crear cuenta</span>
+          </button>
+        </div>
+
+        <!-- Formulario -->
+        <form class="space-y-4" onsubmit="event.preventDefault();">
+          
+          <!-- Campo 1: Correo electrónico (Mostrado enfocado con borde Café de 2 px) -->
+          <div>
+            <label for="email" class="block text-xs font-bold text-[#473C33] uppercase tracking-wider mb-1.5">
+              Correo electrónico
+            </label>
+            <div class="relative flex items-center">
+              <span class="material-symbols-rounded absolute left-3.5 text-[#473C33] text-[20px] pointer-events-none">
+                mail
+              </span>
+              <input 
+                id="email" 
+                type="email" 
+                value="cquispe@unsa.edu.pe"
+                placeholder="tucorreo@universidad.edu.pe" 
+                class="w-full h-[48px] pl-11 pr-4 bg-white rounded-[12px] text-sm text-[#473C33] font-medium placeholder-[#6B5F54]/60 border-2 border-[#473C33] outline-none shadow-xs"
+              />
+            </div>
+            <p class="text-[11px] text-[#6B5F54] mt-1.5 flex items-center gap-1 font-medium">
+              <span class="material-symbols-rounded text-[14px]">info</span>
+              Usa preferentemente tu correo institucional
+            </p>
+          </div>
+
+          <!-- Campo 2: Contraseña -->
+          <div>
+            <label for="password" class="block text-xs font-bold text-[#473C33] uppercase tracking-wider mb-1.5">
+              Contraseña
+            </label>
+            <div class="relative flex items-center">
+              <span class="material-symbols-rounded absolute left-3.5 text-[#6B5F54] text-[20px] pointer-events-none">
+                lock
+              </span>
+              <input 
+                id="password" 
+                type="password" 
+                value="••••••••••••"
+                placeholder="Ingresa tu contraseña" 
+                class="w-full h-[48px] pl-11 pr-11 bg-white rounded-[12px] text-sm text-[#473C33] font-medium placeholder-[#6B5F54]/60 border border-[#E5E0D3] focus:border-2 focus:border-[#473C33] outline-none transition-colors"
+              />
+              <button type="button" class="absolute right-3.5 text-[#6B5F54] hover:text-[#473C33] transition-colors focus:outline-none" title="Mostrar contraseña">
+                <span class="material-symbols-rounded text-[20px]">visibility</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Enlace ¿Olvidaste tu contraseña? -->
+          <div class="flex justify-end pt-0.5">
+            <a href="#" class="text-xs font-semibold text-[#473C33] hover:text-[#473C33]/80 underline decoration-1 underline-offset-2 transition-all">
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+
+          <!-- Botón de acción principal: Ancho completo, 52 px, Mostaza Claro (#FEC868), texto Café Expreso negrita -->
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              class="w-full h-[52px] bg-[#FEC868] hover:bg-[#fed688] active:bg-[#f6be59] text-[#473C33] font-bold text-[15px] rounded-[16px] shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 group cursor-pointer focus:outline-2 focus:outline-[#473C33] focus:outline-offset-2"
+            >
+              <span>Iniciar sesión</span>
+              <span class="material-symbols-rounded text-[20px] group-hover:translate-x-0.5 transition-transform">
+                arrow_forward
+              </span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Texto alternativo de registro -->
+        <div class="text-center mt-5 pt-1">
+          <p class="text-xs text-[#6B5F54]">
+            ¿Aún no tienes cuenta? 
+            <a href="#" class="font-bold text-[#473C33] underline decoration-1 underline-offset-2 hover:text-black">
+              Regístrate
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de privacidad y términos -->
+      <div class="text-center pt-5 mt-4 border-t border-[#E5E0D3]">
+        <p class="text-[12px] leading-relaxed text-[#6B5F54]">
+          Al continuar aceptas los <a href="#" class="underline hover:text-[#473C33]">Términos</a> y la <a href="#" class="underline hover:text-[#473C33]">Política de privacidad</a>.
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

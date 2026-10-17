@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de postulantes - HackSan 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sage-primary': '#ABC270',
+            'sage-tonal': '#EEF3DC',
+            'mustard-secondary': '#FEC868',
+            'coral-accent': '#FDA769',
+            'espresso-dark': '#473C33',
+            'espresso-muted': '#6B5F54',
+            'warm-bg': '#FBF8F1',
+            'surface-card': '#FFFFFF',
+            'warm-border': '#E5E0D3',
+            'status-accepted-bg': '#E3EFCB',
+            'status-accepted-text': '#2F6B2F',
+            'status-waiting-bg': '#FFF0CF',
+            'status-waiting-text': '#7A5200',
+            'status-rejected-bg': '#FBE3DC',
+            'status-rejected-text': '#A8321F'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FBF8F1;
+      color: #473C33;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-rounded.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-warm-bg flex flex-col justify-between antialiased">
+  <!-- Container fixed to mobile screen width -->
+  <div class="relative w-full max-w-[390px] mx-auto min-h-screen flex flex-col bg-warm-bg shadow-sm pb-28">
+
+    <!-- 1. Cabecera superior en Verde Sabio #ABC270 -->
+    <header class="bg-sage-primary text-espresso-dark pt-5 pb-9 px-4 rounded-b-[24px] relative z-0">
+      <!-- Top back action bar -->
+      <div class="flex items-center justify-between mb-2">
+        <button type="button" aria-label="Volver" class="w-10 h-10 -ml-1 rounded-full flex items-center justify-center text-espresso-dark hover:bg-black/5 active:bg-black/10 transition-colors">
+          <span class="material-symbols-rounded text-2xl font-bold">arrow_back</span>
+        </button>
+        <span class="text-xs font-semibold uppercase tracking-wider text-espresso-dark/80 bg-white/20 px-3 py-1 rounded-full">Organizador</span>
+      </div>
+
+      <!-- Header title & subtitle -->
+      <div class="px-1">
+        <div class="text-xs font-bold uppercase tracking-wider text-espresso-dark/90 flex items-center gap-1.5 mb-0.5">
+          <span class="material-symbols-rounded text-base font-semibold">tune</span>
+          Gestión de postulantes
+        </div>
+        <h1 class="text-[22px] font-extrabold text-espresso-dark leading-tight">
+          HackSan 2026 – 3.ª edición
+        </h1>
+      </div>
+    </header>
+
+    <!-- Content area with negative margin overlap for summary card -->
+    <main class="px-4 -mt-6 z-10 flex flex-col gap-4">
+
+      <!-- 2. Tarjeta de resumen blanca superpuesta a la cabecera -->
+      <section class="bg-surface-card rounded-[16px] border border-warm-border p-4 shadow-sm">
+        <!-- Tres datos en fila separados por divisores -->
+        <div class="grid grid-cols-3 divide-x divide-warm-border text-center py-1">
+          <div class="flex flex-col items-center justify-center px-1">
+            <span class="text-[22px] font-extrabold text-espresso-dark leading-none">18</span>
+            <span class="text-xs font-medium text-espresso-muted mt-1.5">Postulantes</span>
+          </div>
+          <div class="flex flex-col items-center justify-center px-1">
+            <span class="text-[22px] font-extrabold text-espresso-dark leading-none">6</span>
+            <span class="text-xs font-medium text-espresso-muted mt-1.5">Aceptados</span>
+          </div>
+          <div class="flex flex-col items-center justify-center px-1">
+            <span class="text-[22px] font-extrabold text-espresso-dark leading-none">12</span>
+            <span class="text-xs font-medium text-espresso-muted mt-1.5">Cupos volunt.</span>
+          </div>
+        </div>
+
+        <!-- Divisor sutil y barra de progreso -->
+        <div class="mt-3.5 pt-3 border-t border-warm-border">
+          <div class="flex justify-between items-center text-xs font-bold text-espresso-dark mb-1.5">
+            <span>6 de 12 cupos cubiertos</span>
+            <span class="text-espresso-muted font-medium">50%</span>
+          </div>
+          <div class="w-full h-2.5 bg-warm-border rounded-full overflow-hidden">
+            <div class="h-full bg-sage-primary rounded-full" style="width: 50%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Segmentos de filtro de Material 3 en fila horizontal desplazable -->
+      <nav aria-label="Filtro de estados" class="flex gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-4 px-4">
+        <!-- Chip "Todos (18)" Activo -->
+        <button type="button" class="flex items-center gap-1.5 bg-sage-tonal border border-sage-primary text-espresso-dark font-bold text-xs px-3.5 py-2 rounded-full whitespace-nowrap shadow-none">
+          <span class="material-symbols-rounded text-base font-bold">check</span>
+          <span>Todos (18)</span>
+        </button>
+
+        <!-- Chip "En espera (9)" Inactivo -->
+        <button type="button" class="flex items-center gap-1.5 bg-surface-card border border-warm-border text-espresso-dark font-medium text-xs px-3.5 py-2 rounded-full whitespace-nowrap hover:bg-neutral-50 transition-colors">
+          <span>En espera (9)</span>
+        </button>
+
+        <!-- Chip "Aceptados (6)" Inactivo -->
+        <button type="button" class="flex items-center gap-1.5 bg-surface-card border border-warm-border text-espresso-dark font-medium text-xs px-3.5 py-2 rounded-full whitespace-nowrap hover:bg-neutral-50 transition-colors">
+          <span>Aceptados (6)</span>
+        </button>
+
+        <!-- Chip "Rechazados (3)" Inactivo -->
+        <button type="button" class="flex items-center gap-1.5 bg-surface-card border border-warm-border text-espresso-dark font-medium text-xs px-3.5 py-2 rounded-full whitespace-nowrap hover:bg-neutral-50 transition-colors">
+          <span>Rechazados (3)</span>
+        </button>
+      </nav>
+
+      <!-- 4. Lista vertical de 4 tarjetas de postulante -->
+      <div class="flex flex-col gap-3">
+
+        <!-- Caso A: Camila Quispe - EN ESPERA (Voluntario) -->
+        <article class="bg-surface-card rounded-[16px] border border-warm-border p-4 flex flex-col gap-3">
+          <!-- Fila Superior: Avatar + Info + Chips (Rol y Estado) -->
+          <div class="flex items-start justify-between gap-2.5">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-11 h-11 rounded-full bg-sage-tonal text-espresso-dark font-bold text-sm flex items-center justify-center shrink-0 border border-warm-border/60">
+                CQ
+              </div>
+              <div class="min-w-0">
+                <h2 class="text-base font-bold text-espresso-dark truncate leading-tight">Camila Quispe</h2>
+                <p class="text-xs text-espresso-muted truncate mt-0.5">Ingeniería de Sistemas · UNSA · VI ciclo</p>
+              </div>
+            </div>
+            
+            <!-- Chips de Rol y Estado en espera -->
+            <div class="flex flex-col items-end gap-1.5 shrink-0">
+              <span class="inline-flex items-center gap-1 bg-surface-card border border-warm-border text-espresso-dark text-[11px] font-semibold px-2 py-0.5 rounded-full">
+                <span class="material-symbols-rounded text-sm">volunteer_activism</span>
+                Voluntario
+              </span>
+              <span class="inline-flex items-center gap-1 bg-status-waiting-bg text-status-waiting-text border border-status-waiting-text text-[11px] font-bold px-2 py-0.5 rounded-full">
+                <span class="material-symbols-rounded text-sm">schedule</span>
+                En espera
+              </span>
+            </div>
+          </div>
+
+          <!-- Fila de Habilidades -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Python</span>
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Oratoria</span>
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Logística</span>
+          </div>
+
+          <!-- Divisor fino y fila de acciones lado a lado -->
+          <div class="border-t border-warm-border pt-3 grid grid-cols-2 gap-2.5">
+            <!-- Botón Rechazar contorneado -->
+            <button type="button" class="h-11 rounded-[12px] border-[1.5px] border-espresso-dark bg-transparent text-espresso-dark font-bold text-xs flex items-center justify-center gap-1.5 active:bg-neutral-100 transition-colors">
+              <span class="material-symbols-rounded text-base font-bold">close</span>
+              Rechazar
+            </button>
+            <!-- Botón Aceptar relleno Mostaza -->
+            <button type="button" class="h-11 rounded-[12px] bg-mustard-secondary text-espresso-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow-none active:brightness-95 transition-all">
+              <span class="material-symbols-rounded text-base font-bold">check</span>
+              Aceptar
+            </button>
+          </div>
+        </article>
+
+        <!-- Caso B: Diego Ramos - EN ESPERA (Asistente) -->
+        <article class="bg-surface-card rounded-[16px] border border-warm-border p-4 flex flex-col gap-3">
+          <!-- Fila Superior: Avatar + Info + Chips -->
+          <div class="flex items-start justify-between gap-2.5">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-11 h-11 rounded-full bg-sage-tonal text-espresso-dark font-bold text-sm flex items-center justify-center shrink-0 border border-warm-border/60">
+                DR
+              </div>
+              <div class="min-w-0">
+                <h2 class="text-base font-bold text-espresso-dark truncate leading-tight">Diego Ramos</h2>
+                <p class="text-xs text-espresso-muted truncate mt-0.5">Diseño Gráfico · UCSM · IV ciclo</p>
+              </div>
+            </div>
+            
+            <!-- Chips de Rol y Estado en espera -->
+            <div class="flex flex-col items-end gap-1.5 shrink-0">
+              <span class="inline-flex items-center gap-1 bg-surface-card border border-warm-border text-espresso-dark text-[11px] font-semibold px-2 py-0.5 rounded-full">
+                <span class="material-symbols-rounded text-sm">confirmation_number</span>
+                Asistente
+              </span>
+              <span class="inline-flex items-center gap-1 bg-status-waiting-bg text-status-waiting-text border border-status-waiting-text text-[11px] font-bold px-2 py-0.5 rounded-full">
+                <span class="material-symbols-rounded text-sm">schedule</span>
+                En espera
+              </span>
+            </div>
+          </div>
+
+          <!-- Fila de Habilidades -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Fotografía</span>
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Ilustración</span>
+          </div>
+
+          <!-- Divisor fino y fila de acciones lado a lado -->
+          <div class="border-t border-warm-border pt-3 grid grid-cols-2 gap-2.5">
+            <!-- Botón Rechazar contorneado -->
+            <button type="button" class="h-11 rounded-[12px] border-[1.5px] border-espresso-dark bg-transparent text-espresso-dark font-bold text-xs flex items-center justify-center gap-1.5 active:bg-neutral-100 transition-colors">
+              <span class="material-symbols-rounded text-base font-bold">close</span>
+              Rechazar
+            </button>
+            <!-- Botón Aceptar relleno Mostaza -->
+            <button type="button" class="h-11 rounded-[12px] bg-mustard-secondary text-espresso-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow-none active:brightness-95 transition-all">
+              <span class="material-symbols-rounded text-base font-bold">check</span>
+              Aceptar
+            </button>
+          </div>
+        </article>
+
+        <!-- Caso C: Valeria Mamani - ACEPTADA (Casilla Asistió MARCADA) -->
+        <article class="bg-surface-card rounded-[16px] border border-warm-border p-4 flex flex-col gap-3">
+          <!-- Fila Superior: Avatar + Info + Chip Rol -->
+          <div class="flex items-start justify-between gap-2.5">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-11 h-11 rounded-full bg-sage-tonal text-espresso-dark font-bold text-sm flex items-center justify-center shrink-0 border border-warm-border/60">
+                VM
+              </div>
+              <div class="min-w-0">
+                <h2 class="text-base font-bold text-espresso-dark truncate leading-tight">Valeria Mamani</h2>
+                <p class="text-xs text-espresso-muted truncate mt-0.5">Comunicación · UCSP · VIII ciclo</p>
+              </div>
+            </div>
+            
+            <span class="inline-flex items-center gap-1 bg-surface-card border border-warm-border text-espresso-dark text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0">
+              <span class="material-symbols-rounded text-sm">volunteer_activism</span>
+              Voluntario
+            </span>
+          </div>
+
+          <!-- Fila de Habilidades -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Redes</span>
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Oratoria</span>
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Logística</span>
+          </div>
+
+          <!-- Divisor fino y fila de estado + checkbox de asistencia MARCADA -->
+          <div class="border-t border-warm-border pt-3 flex items-center justify-between">
+            <!-- Chip de estado Aceptada -->
+            <span class="inline-flex items-center gap-1 bg-status-accepted-bg text-status-accepted-text font-bold text-xs px-2.5 py-1 rounded-full">
+              <span class="material-symbols-rounded fill text-base">check_circle</span>
+              Aceptada
+            </span>
+
+            <!-- Casilla de asistencia MARCADA -->
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <span class="text-xs font-bold text-espresso-dark">Asistió</span>
+              <div class="w-6 h-6 rounded-[6px] bg-sage-primary flex items-center justify-center text-espresso-dark">
+                <span class="material-symbols-rounded text-lg font-bold">check</span>
+              </div>
+            </label>
+          </div>
+        </article>
+
+        <!-- Caso D: Mateo Huamán - ACEPTADA (Casilla Asistió SIN marcar) -->
+        <article class="bg-surface-card rounded-[16px] border border-warm-border p-4 flex flex-col gap-3">
+          <!-- Fila Superior: Avatar + Info + Chip Rol -->
+          <div class="flex items-start justify-between gap-2.5">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-11 h-11 rounded-full bg-sage-tonal text-espresso-dark font-bold text-sm flex items-center justify-center shrink-0 border border-warm-border/60">
+                MH
+              </div>
+              <div class="min-w-0">
+                <h2 class="text-base font-bold text-espresso-dark truncate leading-tight">Mateo Huamán</h2>
+                <p class="text-xs text-espresso-muted truncate mt-0.5">Ingeniería Industrial · UTP · V ciclo</p>
+              </div>
+            </div>
+            
+            <span class="inline-flex items-center gap-1 bg-surface-card border border-warm-border text-espresso-dark text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0">
+              <span class="material-symbols-rounded text-sm">volunteer_activism</span>
+              Voluntario
+            </span>
+          </div>
+
+          <!-- Fila de Habilidades -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Logística</span>
+            <span class="bg-sage-tonal text-espresso-dark text-xs font-semibold px-2.5 py-0.5 rounded-md">Excel</span>
+          </div>
+
+          <!-- Divisor fino y fila de estado + checkbox de asistencia SIN marcar -->
+          <div class="border-t border-warm-border pt-3 flex items-center justify-between">
+            <!-- Chip de estado Aceptada -->
+            <span class="inline-flex items-center gap-1 bg-status-accepted-bg text-status-accepted-text font-bold text-xs px-2.5 py-1 rounded-full">
+              <span class="material-symbols-rounded fill text-base">check_circle</span>
+              Aceptada
+            </span>
+
+            <!-- Casilla de asistencia SIN marcar -->
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <span class="text-xs font-bold text-espresso-dark">Asistió</span>
+              <div class="w-6 h-6 rounded-[6px] bg-white border-2 border-espresso-dark flex items-center justify-center">
+              </div>
+            </label>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+    <!-- 6. Barra inferior fija sobre fondo blanco con borde superior fino -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center pointer-events-none">
+      <footer class="w-full max-w-[390px] bg-surface-card border-t border-warm-border px-4 py-3.5 pointer-events-auto shadow-lg shadow-black/5">
+        <button type="button" class="w-full h-12 rounded-[12px] border-[1.5px] border-espresso-dark bg-transparent text-espresso-dark font-bold text-sm flex items-center justify-center gap-2 hover:bg-warm-bg active:bg-neutral-100 transition-colors">
+          <span class="material-symbols-rounded text-lg">download</span>
+          Exportar lista de asistencia
+        </button>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>

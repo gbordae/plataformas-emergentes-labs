@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mis postulaciones - Súmate</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FBF8F1;
+      color: #473C33;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-rounded.filled {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Reglas inviolables de contraste y estilo */
+    .bg-sage { background-color: #ABC270; }
+    .bg-sage-tonal { background-color: #EEF3DC; }
+    .text-cafe { color: #473C33; }
+    .text-secondary { color: #6B5F54; }
+    .border-warm { border-color: #E5E0D3; }
+    .bg-mustard { background-color: #FEC868; }
+    .bg-coral { background-color: #FDA769; }
+    
+    /* Estados de postulación */
+    .state-aceptada {
+      background-color: #E3EFCB;
+      color: #2F6B2F;
+    }
+    .state-enviada {
+      background-color: #FFF0CF;
+      color: #7A5200;
+      border: 1px solid #7A5200;
+    }
+    .state-rechazada {
+      background-color: #FBE3DC;
+      color: #A8321F;
+    }
+
+    /* Cards e interacciones */
+    .postulacion-card {
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .postulacion-card:hover {
+      border-color: #473C33 !important;
+      box-shadow: 0 4px 14px rgba(71, 60, 51, 0.08);
+      transform: translateY(-1px);
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"></head>
+<body class="flex min-h-screen">
+<!-- ==================== RIEL LATERAL FIJO (240px) ==================== -->
+<aside class="w-[240px] shrink-0 min-h-screen bg-white border-r border-[#E5E0D3] flex flex-col justify-between fixed top-0 bottom-0 left-0 z-40">
+<div class="p-6">
+<!-- Marca Súmate -->
+<div class="flex items-center gap-2 mb-8">
+<div class="text-2xl font-extrabold tracking-tight text-[#473C33] flex items-baseline">
+          S<span class="text-[#FDA769]">ú</span>mate
+        </div>
+<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-[#F5F3EC] text-[#6B5F54] border border-[#E5E0D3]">
+          Arequipa
+        </span>
+</div>
+<!-- Navegación -->
+<nav class="space-y-1">
+<!-- Explorar -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-full text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-rounded text-[22px]">explore</span>
+<span class="">Explorar</span>
+</a>
+<!-- Postulaciones (ACTIVO) -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-full bg-[#EEF3DC] text-[#473C33] font-bold text-sm" href="#">
+<span class="material-symbols-rounded filled text-[22px] text-[#473C33]">assignment_turned_in</span>
+<span class="">Postulaciones</span>
+</a>
+<!-- Mis eventos -->
+<a class="flex items-center justify-between px-3.5 py-2.5 rounded-full text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors font-medium text-sm" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-rounded text-[22px]">event</span>
+<span class="">Mis eventos</span>
+</div>
+<span class="bg-[#FDA769] text-[#473C33] text-xs font-bold px-2 py-0.5 rounded-full">5</span>
+</a>
+<!-- Perfil -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-full text-[#6B5F54] hover:bg-[#F5F3EC] hover:text-[#473C33] transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-rounded text-[22px]">person</span>
+<span class="">Perfil</span>
+</a>
+</nav>
+</div>
+<!-- Bloque de usuario al pie -->
+<div class="p-4 border-t border-[#E5E0D3] flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#EEF3DC] text-[#473C33] font-bold flex items-center justify-center border border-[#ABC270] text-sm shrink-0">
+        CQ
+      </div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-[#473C33] truncate leading-tight">Camila Quispe</p>
+<p class="text-xs text-[#6B5F54] truncate">Estudiante (UNSA)</p>
+</div>
+</div>
+</aside>
+<!-- ==================== ÁREA DE CONTENIDO PRINCIPAL ==================== -->
+<main class="ml-[240px] flex-1 min-h-screen flex flex-col bg-[#FBF8F1]"><div class="w-full bg-[#FBF8F1] border-b border-[#E5E0D3] px-8 py-3 flex items-center justify-end z-20 shrink-0"><button type="button" class="w-10 h-10 rounded-full bg-white border border-[#E5E0D3] hover:border-[#473C33] flex items-center justify-center text-[#473C33] transition-colors shadow-sm" title="Perfil de usuario"><span class="material-symbols-rounded text-[22px]">person</span></button></div><div class="flex flex-col w-full pb-16">
+<!-- 1. BANDA DE CABECERA VERDE SABIO -->
+<header class="w-full bg-[#ABC270] rounded-b-[24px] px-8 pt-7 pb-8 text-[#473C33]">
+<div class="max-w-[1140px] mx-auto flex flex-col items-start gap-2.5">
+
+<div class="space-y-1">
+<h1 class="text-[34px] leading-[40px] font-extrabold tracking-tight text-[#473C33]">
+          Mis postulaciones
+        </h1>
+<p class="text-sm font-semibold text-[#473C33]/90">
+          Sigue el estado de cada convocatoria e historial de participación
+        </p>
+</div>
+</div>
+</header>
+<div class="max-w-[1140px] w-full mx-auto px-8 flex flex-col gap-7 mt-6">
+<!-- 2. BARRA DE PESTAÑAS Y FILTRO -->
+<section class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#E5E0D3] pb-px">
+<!-- Pestañas -->
+<nav class="flex items-center gap-8 -mb-px">
+<button class="pb-3 text-sm font-medium text-[#6B5F54] hover:text-[#473C33] transition-colors flex items-center gap-1.5" type="button">
+<span class="">Activas</span>
+<span class="bg-[#E5E0D3] text-[#6B5F54] text-xs font-bold px-2 py-0.5 rounded-full">4</span>
+</button>
+<button class="pb-3 text-sm font-bold text-[#473C33] border-b-[3px] border-[#473C33] flex items-center gap-1.5" type="button">
+<span class="">Historial</span>
+<span class="bg-[#EEF3DC] text-[#473C33] text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+</button>
+</nav>
+<!-- Controles de filtrado -->
+<div class="flex items-center gap-3 pb-2 sm:pb-0">
+<label class="sr-only" for="period-select">Seleccionar ciclo académico</label>
+<div class="relative inline-flex items-center">
+<span class="material-symbols-rounded text-[#6B5F54] text-lg absolute left-3 pointer-events-none">calendar_month</span>
+<select class="h-10 pl-9 pr-9 text-xs font-bold text-[#473C33] bg-white border border-[#E5E0D3] rounded-full appearance-none focus:outline-none focus:border-[#473C33] cursor-pointer shadow-sm" id="period-select">
+<option value="2025-2026">Ciclo: 2025 – 2026</option>
+<option value="2024-2025">Ciclo: 2024 – 2025</option>
+<option value="todos">Todos los periodos</option>
+</select>
+<span class="material-symbols-rounded text-[#473C33] text-base absolute right-3 pointer-events-none">expand_more</span>
+</div>
+<button class="h-10 px-4 rounded-full bg-white border border-[#E5E0D3] text-xs font-bold text-[#473C33] hover:border-[#473C33] transition-colors flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-rounded text-base">filter_list</span>
+<span class="">Todos los registros</span>
+</button>
+</div>
+</section>
+<!-- 3. TARJETA RESUMEN DE CONSTANCIAS DIGITALES -->
+<section class="w-full bg-[#EEF3DC] border border-[#ABC270] rounded-2xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#ABC270]/40">
+<span class="material-symbols-rounded filled text-[32px] text-[#473C33]">workspace_premium</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#473C33] leading-snug">
+            3 participaciones · 3 constancias digitales
+          </h2>
+<p class="text-sm text-[#6B5F54] max-w-2xl mt-0.5">
+            Tus constancias institucionales cuentan con firma digital y código QR verificable para créditos extracurriculares en Arequipa.
+          </p>
+</div>
+</div>
+<div class="flex items-center shrink-0 self-start md:self-auto">
+<a class="h-11 px-5 rounded-full bg-white border border-[#ABC270] hover:border-[#473C33] text-xs font-bold text-[#473C33] transition-all flex items-center gap-2 shadow-sm" href="#descargar-todo">
+<span class="material-symbols-rounded text-lg">download</span>
+<span class="">Descargar todas las constancias (.zip)</span>
+</a>
+</div>
+</section>
+<!-- 4. GRID DE TARJETAS DE HISTORIAL -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Tarjeta 1: HackSan 2025 -->
+<article class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-6 flex flex-col justify-between">
+<div class="flex flex-col gap-4">
+<!-- Tags Header -->
+<div class="flex items-center justify-between gap-2">
+<span class="bg-[#FDA769] text-[#473C33] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Hackathon
+            </span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#E5E0D3] bg-[#FBF8F1] text-xs font-semibold text-[#473C33]">
+<span class="material-symbols-rounded text-sm">front_hand</span>
+<span class="">Voluntario</span>
+</div>
+</div>
+<!-- Título y Datos institucionales -->
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-[#473C33] leading-snug">
+              HackSan 2025 – 2.ª edición
+            </h3>
+<div class="space-y-1 pt-1">
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">school</span>
+<span class="">UNSA · Pabellón de Sistemas</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">calendar_today</span>
+<span class="">sáb 18 nov 2025</span>
+</div>
+</div>
+</div>
+<!-- Asistencia -->
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-[#E3EFCB]/80 text-[#2F6B2F]">
+<span class="material-symbols-rounded filled text-base">check_circle</span>
+<span class="text-xs font-semibold text-[#473C33]">Asististe el 18 nov · 16 horas acreditadas</span>
+</div>
+</div>
+<!-- Acciones pie -->
+<div class="mt-6 pt-4 border-t border-[#E5E0D3] flex items-center justify-between">
+<button class="inline-flex items-center gap-1.5 text-xs font-bold text-[#473C33] hover:underline underline-offset-4" type="button">
+<span class="material-symbols-rounded text-base">workspace_premium</span>
+<span class="">Ver constancia digital</span>
+</button>
+<button class="w-8 h-8 rounded-full hover:bg-[#F5F3EC] flex items-center justify-center text-[#473C33] transition-colors" title="Descargar PDF (1.2 MB)" type="button">
+<span class="material-symbols-rounded text-lg">download</span>
+</button>
+</div>
+</article>
+<!-- Tarjeta 2: Foro Sur de Ciberseguridad e IA -->
+<article class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-6 flex flex-col justify-between">
+<div class="flex flex-col gap-4">
+<!-- Tags Header -->
+<div class="flex items-center justify-between gap-2">
+<span class="bg-[#FDA769] text-[#473C33] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Ponencia
+            </span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#E5E0D3] bg-[#FBF8F1] text-xs font-semibold text-[#473C33]">
+<span class="material-symbols-rounded text-sm">confirmation_number</span>
+<span class="">Asistente</span>
+</div>
+</div>
+<!-- Título y Datos institucionales -->
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-[#473C33] leading-snug">
+              Foro Sur de Ciberseguridad e IA
+            </h3>
+<div class="space-y-1 pt-1">
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">school</span>
+<span class="">UCSM · Auditorio Principal</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">calendar_today</span>
+<span class="">vie 24 oct 2025</span>
+</div>
+</div>
+</div>
+<!-- Asistencia -->
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-[#E3EFCB]/80 text-[#2F6B2F]">
+<span class="material-symbols-rounded filled text-base">check_circle</span>
+<span class="text-xs font-semibold text-[#473C33]">Asististe el 24 oct · 4 horas acreditadas</span>
+</div>
+</div>
+<!-- Acciones pie -->
+<div class="mt-6 pt-4 border-t border-[#E5E0D3] flex items-center justify-between">
+<button class="inline-flex items-center gap-1.5 text-xs font-bold text-[#473C33] hover:underline underline-offset-4" type="button">
+<span class="material-symbols-rounded text-base">workspace_premium</span>
+<span class="">Ver constancia digital</span>
+</button>
+<button class="w-8 h-8 rounded-full hover:bg-[#F5F3EC] flex items-center justify-center text-[#473C33] transition-colors" title="Descargar PDF (850 KB)" type="button">
+<span class="material-symbols-rounded text-lg">download</span>
+</button>
+</div>
+</article>
+<!-- Tarjeta 3: Reforestación Valle de Chilina -->
+<article class="postulacion-card bg-white rounded-2xl border border-[#E5E0D3] p-6 flex flex-col justify-between">
+<div class="flex flex-col gap-4">
+<!-- Tags Header -->
+<div class="flex items-center justify-between gap-2">
+<span class="bg-[#FDA769] text-[#473C33] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Campaña
+            </span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#E5E0D3] bg-[#FBF8F1] text-xs font-semibold text-[#473C33]">
+<span class="material-symbols-rounded text-sm">front_hand</span>
+<span class="">Voluntario</span>
+</div>
+</div>
+<!-- Título y Datos institucionales -->
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-[#473C33] leading-snug">
+              Reforestación Valle de Chilina 2025
+            </h3>
+<div class="space-y-1 pt-1">
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">park</span>
+<span class="">UCSP · Área Ambiental</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">calendar_today</span>
+<span class="">dom 12 oct 2025</span>
+</div>
+</div>
+</div>
+<!-- Asistencia -->
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-[#E3EFCB]/80 text-[#2F6B2F]">
+<span class="material-symbols-rounded filled text-base">check_circle</span>
+<span class="text-xs font-semibold text-[#473C33]">Asististe el 12 oct · 8 horas acreditadas</span>
+</div>
+</div>
+<!-- Acciones pie -->
+<div class="mt-6 pt-4 border-t border-[#E5E0D3] flex items-center justify-between">
+<button class="inline-flex items-center gap-1.5 text-xs font-bold text-[#473C33] hover:underline underline-offset-4" type="button">
+<span class="material-symbols-rounded text-base">workspace_premium</span>
+<span class="">Ver constancia digital</span>
+</button>
+<button class="w-8 h-8 rounded-full hover:bg-[#F5F3EC] flex items-center justify-center text-[#473C33] transition-colors" title="Descargar PDF (2.1 MB)" type="button">
+<span class="material-symbols-rounded text-lg">download</span>
+</button>
+</div>
+</article>
+<!-- Tarjeta 4: Caso No Asistió -->
+<article class="postulacion-card bg-white/70 rounded-2xl border border-[#E5E0D3] p-6 flex flex-col justify-between opacity-80 hover:opacity-100">
+<div class="flex flex-col gap-4">
+<!-- Tags Header -->
+<div class="flex items-center justify-between gap-2">
+<span class="bg-[#F5F3EC] text-[#6B5F54] border border-[#E5E0D3] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Taller
+            </span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#E5E0D3] bg-[#FBF8F1] text-xs font-semibold text-[#6B5F54]">
+<span class="material-symbols-rounded text-sm">confirmation_number</span>
+<span class="">Asistente</span>
+</div>
+</div>
+<!-- Título y Datos institucionales -->
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-[#473C33] leading-snug">
+              Taller de Innovación Abierta 2025
+            </h3>
+<div class="space-y-1 pt-1">
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">school</span>
+<span class="">UTP · Lab de Proyectos</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-medium text-[#6B5F54]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">calendar_today</span>
+<span class="">jue 18 sep 2025</span>
+</div>
+</div>
+</div>
+<!-- Chip No Asististe -->
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-[#E5E0D3] text-[#473C33]">
+<span class="material-symbols-rounded text-base text-[#6B5F54]">event_busy</span>
+<span class="text-xs font-bold text-[#473C33]">No asististe · 0 horas registradas</span>
+</div>
+</div>
+<!-- Acciones pie: Deshabilitado / Explicativo -->
+<div class="mt-6 pt-4 border-t border-[#E5E0D3] flex items-center justify-between">
+<span class="text-xs font-medium text-[#6B5F54]">
+            Convocatoria cerrada sin emisión de certificado
+          </span>
+<span class="material-symbols-rounded text-[#6B5F54] text-base" title="No elegible para constancia">info</span>
+</div>
+</article>
+</section>
+<!-- 5. PIE INFORMATIVO INSTITUCIONAL -->
+<footer class="mt-4 p-5 rounded-2xl border border-[#E5E0D3] bg-white flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<span class="material-symbols-rounded text-[#ABC270] text-2xl">verified_user</span>
+<p class="text-[#6B5F54]">
+          ¿Necesitas convalidar tus horas en secretaría académica? Todas las constancias de Súmate Arequipa cumplen la norma universitaria vigente.
+        </p>
+</div>
+<a class="shrink-0 font-bold text-[#473C33] hover:underline flex items-center gap-1" href="#guia-convalidacion">
+<span class="">Guía de convalidación</span>
+<span class="material-symbols-rounded text-base">arrow_forward</span>
+</a>
+</footer>
+</div>
+</div></main>
+
+
+</body></html>
