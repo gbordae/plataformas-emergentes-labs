@@ -1,0 +1,23 @@
+// firestore.rules
+// Reglas de seguridad para Firestore - Solo usuarios autenticados pueden leer/crear/actualizar su propio documento
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Denegar todo por defecto
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Regla específica para usuarios/{uid}
+    match /usuarios/{uid} {
+      // Lectura, creación y actualización permitidas solo al usuario autenticado con el mismo uid
+      allow get, list: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid &&
+        request.resource.data.correo == request.auth.token.email;
+      allow update: if request.auth != null && request.auth.uid == uid &&
+        request.resource.data.correo == resource.data.correo;
+      // No se permite delete
+      allow delete: if false;
+    }
+  }
+}
