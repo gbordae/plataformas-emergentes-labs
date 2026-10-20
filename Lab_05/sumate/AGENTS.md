@@ -1,0 +1,7 @@
+- Lee docs/CONTEXTO.md antes de cualquier tarea; respeta sus secciones 5 (modelo) y 12 (reglas).
+- Nombres de campos de Firestore exactamente como en la sección 5.
+- Código en Dart comentado en español, breve y claro; es un proyecto de estudiante.
+- Sin sobreingeniería ni funciones fuera de los requisitos. Sin paquetes nuevos sin preguntar.
+- Debe funcionar en Android y web.
+- Al terminar: ejecuta flutter analyze y flutter test, y resume qué archivos creó o cambió.
+- No hagas commits ni push; los hago yo.

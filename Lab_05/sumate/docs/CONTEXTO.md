@@ -34,25 +34,28 @@ Contexto académico: Laboratorio 5 del curso Plataformas Emergentes (UNSA, Ingen
 
 ```
 usuarios/{uid}
-  nombre, correo, universidad, carrera, ciclo,
-  habilidades[], intereses[]
+  nombre, correo, universidad (opcional, '' = independiente), carrera,
+  ciclo (opcional), habilidades[], intereses[]
 
 eventos/{eventoId}                  // la marca / serie
-  nombre, tipo (hackathon | ponencia | lanzamiento | campaña | conferencia | otro),
+  nombre, tipo (hackathon | ponencia | lanzamiento | campana | conferencia | otro),
   descripcion, entidad, administradores[uid]
 
 ediciones/{edicionId}               // cada realización
-  eventoId, nombre, fechaInicio, fechaFin,
-  lugar, modalidad (presencial | remoto | híbrido), universidad,
+  eventoId, eventoNombre*, tipo*,   // *copiados del evento (denormalizados)
+  nombre, fechaInicio, fechaFin,
+  lugar, modalidad (presencial | remoto | hibrido), universidad (opcional),
   estado (abierta | cerrada | finalizada),
   organizadores[uid],
-  voluntarios: { abierta, cupos, beneficios, fechaLimite, enlaceExterno }
-  asistentes:  { abierta, cupos, fechaLimite, enlaceExterno }
+  voluntarios: { abierta, cupos, ocupados, beneficios, fechaLimite?, enlaceExterno? }
+  asistentes:  { abierta, cupos, ocupados, fechaLimite?, enlaceExterno? }
 
 postulaciones/{edicionId_usuarioId_rol}
   edicionId, usuarioId, rol (voluntario | asistente),
   estado (enviada | aceptada | rechazada),
-  asistio (bool), fecha
+  asistio (bool), fecha,
+  perfil: { nombre, correo, universidad, carrera, ciclo, habilidades[] },  // snapshot al postular
+  eventoNombre, edicionNombre, fechaInicio, lugar                          // denormalizados
 ```
 
 Notas:
@@ -235,7 +238,7 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 - [x] Prototipo de pantallas (Google Stitch) en `docs/diseno/` (12 móvil + 12 web)
 - [x] Nombre y paleta definidos (Súmate, Warm Civic)
 - [x] Diseño responsive definido (móvil y web)
-- [ ] Firebase conectado (Auth + Firestore)
+- [x] Firebase conectado (Auth + Firestore)
 - [ ] Módulo 1: Autenticación y perfil
 - [ ] Módulo 2: Convocatorias
 - [ ] Módulo 3: Postulaciones
