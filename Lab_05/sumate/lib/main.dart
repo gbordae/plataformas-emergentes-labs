@@ -13,7 +13,7 @@ import 'pruebas/prueba_back.dart';
 import 'pruebas/seed_demo.dart';
 
 // Cambiar a true para usar los emuladores locales
-const bool usarEmulador = false;
+const bool usarEmulador = true;
 
 // Modo de siembra de datos de ejemplo (seed demo).
 // Para sembrar en la base de datos real de Firebase:
@@ -21,7 +21,7 @@ const bool usarEmulador = false;
 // 2. Ejecutar la app (flutter run -d chrome).
 // 3. Pulsar el botón "Sembrar datos de demo" en la pantalla.
 // 4. Volver a dejar usarEmulador = true (o según se requiera) y modoSeed = false.
-const bool modoSeed = true;
+const bool modoSeed = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
