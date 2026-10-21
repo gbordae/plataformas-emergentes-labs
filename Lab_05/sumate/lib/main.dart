@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'features/auth/servicios/auth_service.dart';
 import 'features/perfil/servicios/usuario_service.dart';
+import 'pruebas/prueba_back.dart';
 
 
 // Cambiar a true para usar los emuladores locales
@@ -27,7 +28,7 @@ Future<void> main() async {
     FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
   }
 
-  runApp(const AuthDemoApp());
+  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: PruebaBackScreen()));
 }
 
 /// Aplicación de prueba que recorre los pasos solicitados.

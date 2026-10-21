@@ -41,6 +41,39 @@ class Edicion {
     this.asistentes = const Convocatoria.cerrada(),
   });
 
+  // copyWith for Edicion
+  Edicion copyWith({
+    String? id,
+    String? eventoId,
+    String? eventoNombre,
+    TipoEvento? tipo,
+    String? nombre,
+    DateTime? fechaInicio,
+    DateTime? fechaFin,
+    String? lugar,
+    Modalidad? modalidad,
+    String? universidad,
+    EstadoEdicion? estado,
+    List<String>? organizadores,
+    Convocatoria? voluntarios,
+    Convocatoria? asistentes,
+  }) => Edicion(
+    id: id ?? this.id,
+    eventoId: eventoId ?? this.eventoId,
+    eventoNombre: eventoNombre ?? this.eventoNombre,
+    tipo: tipo ?? this.tipo,
+    nombre: nombre ?? this.nombre,
+    fechaInicio: fechaInicio ?? this.fechaInicio,
+    fechaFin: fechaFin ?? this.fechaFin,
+    lugar: lugar ?? this.lugar,
+    modalidad: modalidad ?? this.modalidad,
+    universidad: universidad ?? this.universidad,
+    estado: estado ?? this.estado,
+    organizadores: organizadores ?? this.organizadores,
+    voluntarios: voluntarios ?? this.voluntarios,
+    asistentes: asistentes ?? this.asistentes,
+  );
+
   // ── Lógica de negocio ───────────────────────────────────────────────────
 
   /// Devuelve la convocatoria correspondiente al [rol].

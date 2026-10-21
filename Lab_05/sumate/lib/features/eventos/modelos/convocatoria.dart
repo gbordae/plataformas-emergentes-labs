@@ -21,6 +21,24 @@ class Convocatoria {
     this.enlaceExterno,
   });
 
+  // copyWith for Convocatoria
+  Convocatoria copyWith({
+    bool? abierta,
+    int? cupos,
+    int? ocupados,
+    String? beneficios,
+    DateTime? fechaLimite,
+    String? enlaceExterno,
+  }) => Convocatoria(
+    abierta: abierta ?? this.abierta,
+    cupos: cupos ?? this.cupos,
+    ocupados: ocupados ?? this.ocupados,
+    beneficios: beneficios ?? this.beneficios,
+    fechaLimite: fechaLimite ?? this.fechaLimite,
+    enlaceExterno: enlaceExterno ?? this.enlaceExterno,
+  );
+
+
   /// Convocatoria cerrada por defecto (sin cupos ni datos).
   const Convocatoria.cerrada()
       : abierta = false,

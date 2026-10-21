@@ -23,6 +23,22 @@ class Evento {
     this.administradores = const [],
   });
 
+  Evento copyWith({
+    String? id,
+    String? nombre,
+    TipoEvento? tipo,
+    String? descripcion,
+    String? entidad,
+    List<String>? administradores,
+  }) => Evento(
+    id: id ?? this.id,
+    nombre: nombre ?? this.nombre,
+    tipo: tipo ?? this.tipo,
+    descripcion: descripcion ?? this.descripcion,
+    entidad: entidad ?? this.entidad,
+    administradores: administradores ?? this.administradores,
+  );
+
   // ── Deserialización ─────────────────────────────────────────────────────
 
   factory Evento.fromMap(Map<String, dynamic> map, {required String id}) {
