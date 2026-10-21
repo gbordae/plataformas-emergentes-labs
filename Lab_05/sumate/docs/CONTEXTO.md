@@ -233,19 +233,41 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 - Datos de ejemplo (seed) para la demo: algunos eventos de distintas universidades.
 
 ## 13. Estado actual
+
+### Infraestructura y diseño
 - [x] Proyecto Flutter creado
 - [x] Repositorio en GitHub conectado
 - [x] Prototipo de pantallas (Google Stitch) en `docs/diseno/` (12 móvil + 12 web)
 - [x] Nombre y paleta definidos (Súmate, Warm Civic)
 - [x] Diseño responsive definido (móvil y web)
-- [x] Firebase conectado (Auth + Firestore)
-- [ ] Módulo 1: Autenticación y perfil
-- [ ] Módulo 2: Convocatorias
-- [ ] Módulo 3: Postulaciones
-- [ ] Módulo 4: Historial y constancias
-- [ ] Reglas de Firestore
-- [ ] Datos de ejemplo
+- [x] Firebase conectado (Auth + Firestore), verificado en Chrome
+- [x] Emulador de Firebase configurado (auth 9099, firestore 8080) y usado para probar
+
+### BACK (capa de datos, sin UI final)
+- [x] Paso 2: enums y modelos + tests (`lib/core/enums.dart`, `features/*/modelos/`)
+- [x] Paso 3: AuthService y UsuarioService (probado con emulador)
+- [x] Paso 4: EventoService y EdicionService + reglas de eventos y ediciones (probado con emulador)
+- [x] Paso 5: PostulacionService + reglas de postulaciones (implementado con pantalla de prueba)
+- [ ] Paso 6: consolidar `firestore.rules`, índices y despliegue
+- [ ] Paso 7: seed de datos de ejemplo
+- [ ] Paso 8: pantalla de prueba final / revisión
+
+### FRONT (UI)
+- [ ] Base: tema central, `responsive.dart`, `AppShell`
+- [ ] Módulo 1: Autenticación y perfil (RF01, RF02)
+- [ ] Módulo 2: Convocatorias (RF03 a RF06)
+- [ ] Módulo 3: Postulaciones (RF07 a RF10)
+- [ ] Módulo 4: Historial y constancias (RF11)
+- [ ] Extras B (RF12 a RF15)
+
+### Cierre
 - [ ] Probado en Android y web
-- [ ] Subido a GitHub
+- [ ] Subido a GitHub (el código ya se sube por paso; falta la entrega final)
+
+### Pendientes técnicos anotados
+- Paso 6: en `eventos`, el `update` debe validarse contra `resource.data.administradores` (el paso 5 lo corrige; verificar).
+- `editar()` no puede borrar `beneficios` ni `enlaceExterno` una vez puestos (aceptable por ahora).
+- RF15: la colección `usuarios` es privada, así que asignar organizadores por correo necesitará un índice mínimo `correo → uid` (decidir al llegar a esa pantalla).
+- El navegador muestra avisos rojos en modo debug (assertion de `viewInsets`, fuentes Noto); son del motor de Flutter web, no del código.
 
 *(Actualizar esta sección al terminar cada paso.)*
