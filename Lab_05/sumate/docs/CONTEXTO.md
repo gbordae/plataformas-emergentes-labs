@@ -248,7 +248,7 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 - [x] Paso 3: AuthService y UsuarioService (probado con emulador)
 - [x] Paso 4: EventoService y EdicionService + reglas de eventos y ediciones (probado con emulador)
 - [x] Paso 5: PostulacionService + reglas de postulaciones (implementado con pantalla de prueba)
-- [ ] Paso 6: consolidar `firestore.rules`, índices y despliegue
+- [x] Paso 6: consolidar `firestore.rules`, índices y despliegue
 - [ ] Paso 7: seed de datos de ejemplo
 - [ ] Paso 8: pantalla de prueba final / revisión
 

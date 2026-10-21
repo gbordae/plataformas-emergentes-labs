@@ -1,58 +1,97 @@
 // firestore.rules
+//
+// Reglas de seguridad de Cloud Firestore para Súmate.
+//
+// Política general de seguridad:
+// - Denegar todo acceso por defecto (match /{document=**} { allow read, write: if false; }).
+// - RNF04 (Seguridad): Cada usuario edita únicamente su propia información.
+//   Solo los administradores de un evento y los organizadores de una edición
+//   pueden modificarlos y ver la lista completa de sus postulantes.
+// - RNF07 (Privacidad): La colección 'usuarios' es estrictamente privada; cada usuario
+//   solo puede leer y actualizar su propio documento. Los organizadores de una edición
+//   únicamente tienen acceso al snapshot del perfil guardado en el documento de postulación.
+// - No se permite la eliminación de documentos (delete: if false) en ninguna colección
+//   para preservar la integridad histórica y la trazabilidad del sistema.
+
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Denegar todo por defecto
-    match /{document=**} { allow read, write: if false; }
+    // Denegar todo acceso por defecto
+    match /{document=**} {
+      allow read, write: if false;
+    }
 
-    // ── usuarios ────────────────────────────────────────────────────────
+    // ── Funciones auxiliares ──────────────────────────────────────────────
+    // Comprueba que la solicitud provenga de un usuario autenticado
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    // Comprueba que el usuario autenticado sea el dueño del recurso
+    function esDueno(uid) {
+      return autenticado() && request.auth.uid == uid;
+    }
+
+    // Obtiene los datos de una edición a partir de su id
+    function edicionDe(id) {
+      return get(/databases/$(database)/documents/ediciones/$(id)).data;
+    }
+
+    // ── usuarios ──────────────────────────────────────────────────────────
+    // RNF07: Perfil estrictamente privado. Solo el propio usuario puede leer y escribir.
     match /usuarios/{uid} {
-      allow get, list: if request.auth != null && request.auth.uid == uid;
-      allow create: if request.auth != null && request.auth.uid == uid &&
+      allow get, list: if esDueno(uid);
+      allow create: if esDueno(uid) &&
                     request.resource.data.correo == request.auth.token.email;
-      allow update: if request.auth != null && request.auth.uid == uid &&
+      allow update: if esDueno(uid) &&
                     request.resource.data.correo == resource.data.correo;
-      // No delete
+      allow delete: if false;
     }
 
-    // ── eventos ─────────────────────────────────────────────────────────
-    // Cualquier autenticado puede leer eventos.
-    // Solo administradores del documento actual pueden editar.
-    // Solo quien se incluya como administrador puede crear.
+    // ── eventos ───────────────────────────────────────────────────────────
+    // Marca o serie del evento. Lectura pública para cualquier autenticado.
+    // Solo sus administradores pueden modificarlo.
     match /eventos/{id} {
-      allow read: if request.auth != null;
-      // create: el creador debe estar en la lista de admins del nuevo doc
-      allow create: if request.auth != null &&
+      allow read: if autenticado();
+      // create: el creador debe incluirse como administrador del evento
+      allow create: if autenticado() &&
                     request.auth.uid in request.resource.data.administradores;
-      // update: el editor debe ser admin del documento ACTUAL (resource)
-      allow update: if request.auth != null &&
+      // update: solo un administrador actual (resource) puede actualizar
+      allow update: if autenticado() &&
                     request.auth.uid in resource.data.administradores;
-      // No delete
+      allow delete: if false;
     }
 
-    // ── ediciones ───────────────────────────────────────────────────────
+    // ── ediciones ─────────────────────────────────────────────────────────
+    // Realización concreta de un evento. Lectura pública para autenticados.
     match /ediciones/{id} {
-      allow read: if request.auth != null;
+      allow read: if autenticado();
 
-      // Crear: organizador del nuevo doc + estado inicial + contadores en 0
-      // + debe ser admin del evento padre
-      allow create: if request.auth != null &&
+      // Crear: organizador del nuevo doc + estado inicial 'abierta' + contadores en 0
+      // + el creador debe ser administrador del evento padre (evaluado con getAfter)
+      allow create: if autenticado() &&
                     request.auth.uid in request.resource.data.organizadores &&
                     request.resource.data.estado == 'abierta' &&
                     request.resource.data.voluntarios.ocupados == 0 &&
                     request.resource.data.asistentes.ocupados == 0 &&
                     request.auth.uid in getAfter(/databases/$(database)/documents/eventos/$(request.resource.data.eventoId)).data.administradores;
 
-      // Update por organizador: puede cambiar cualquier campo excepto eventoId
-      allow update: if request.auth != null &&
+      // Update por organizador: puede gestionar su edición manteniendo integridad
+      // de contadores, estados válidos y al menos un organizador asignado.
+      allow update: if autenticado() &&
                     request.auth.uid in resource.data.organizadores &&
-                    request.resource.data.eventoId == resource.data.eventoId;
+                    request.resource.data.eventoId == resource.data.eventoId &&
+                    request.resource.data.estado in ['abierta', 'cerrada', 'finalizada'] &&
+                    request.resource.data.voluntarios.ocupados >= 0 &&
+                    request.resource.data.voluntarios.ocupados <= request.resource.data.voluntarios.cupos &&
+                    request.resource.data.asistentes.ocupados >= 0 &&
+                    request.resource.data.asistentes.ocupados <= request.resource.data.asistentes.cupos &&
+                    request.resource.data.organizadores.size() >= 1;
 
       // Update por postulante asistente: solo puede incrementar en 1
-      // el contador de asistentes.ocupados, si hay cupo y la convocatoria
-      // está abierta. El existsAfter verifica que se cree su postulación
-      // en la misma transacción.
-      allow update: if request.auth != null
+      // el contador de asistentes.ocupados si hay cupo y la convocatoria está abierta.
+      // existsAfter verifica que se cree su postulación en la misma transacción.
+      allow update: if autenticado()
                     && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['asistentes'])
                     && request.resource.data.asistentes.diff(resource.data.asistentes).affectedKeys().hasOnly(['ocupados'])
                     && request.resource.data.asistentes.ocupados == resource.data.asistentes.ocupados + 1
@@ -61,38 +100,44 @@ service cloud.firestore {
                     && resource.data.asistentes.abierta == true
                     && existsAfter(/databases/$(database)/documents/postulaciones/$(id + '_' + request.auth.uid + '_asistente'));
 
-      // No delete
+      allow delete: if false;
     }
 
-    // ── postulaciones ───────────────────────────────────────────────────
+    // ── postulaciones ─────────────────────────────────────────────────────
     match /postulaciones/{pid} {
       // Lectura: el dueño de la postulación O un organizador de la edición;
       // si no existe aún, se permite leer (devuelve vacío) para que la transacción compruebe duplicados.
-      allow read: if request.auth != null &&
+      allow read: if autenticado() &&
                   (resource == null ||
                    resource.data.usuarioId == request.auth.uid ||
-                   request.auth.uid in get(/databases/$(database)/documents/ediciones/$(resource.data.edicionId)).data.organizadores);
+                   request.auth.uid in edicionDe(resource.data.edicionId).organizadores);
 
-      // Crear: el usuario se postula a sí mismo con id determinista
-      allow create: if request.auth != null
+      // Crear: el usuario se postula a sí mismo con id determinista.
+      // Exige que la edición y la convocatoria del rol estén abiertas.
+      allow create: if autenticado()
                     && request.resource.data.usuarioId == request.auth.uid
                     && pid == request.resource.data.edicionId + '_' + request.auth.uid + '_' + request.resource.data.rol
                     && request.resource.data.rol in ['voluntario', 'asistente']
                     && request.resource.data.asistio == false
                     && request.resource.data.estado == (request.resource.data.rol == 'asistente' ? 'aceptada' : 'enviada')
-                    && get(/databases/$(database)/documents/ediciones/$(request.resource.data.edicionId)).data.estado == 'abierta';
+                    && edicionDe(request.resource.data.edicionId).estado == 'abierta'
+                    && (
+                      (request.resource.data.rol in edicionDe(request.resource.data.edicionId) &&
+                       edicionDe(request.resource.data.edicionId)[request.resource.data.rol].abierta == true) ||
+                      (request.resource.data.rol + 's' in edicionDe(request.resource.data.edicionId) &&
+                       edicionDe(request.resource.data.edicionId)[request.resource.data.rol + 's'].abierta == true)
+                    );
 
-      // Actualizar: solo organizadores de la edición, y solo estado/asistio.
+      // Actualizar: solo organizadores de la edición, y solo estado o asistio.
       // Si se marca asistio=true, la postulación debe estar aceptada
       // y la fecha actual >= fechaInicio de la postulación.
-      allow update: if request.auth != null
-                    && request.auth.uid in get(/databases/$(database)/documents/ediciones/$(resource.data.edicionId)).data.organizadores
+      allow update: if autenticado()
+                    && request.auth.uid in edicionDe(resource.data.edicionId).organizadores
                     && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['estado', 'asistio'])
                     && (request.resource.data.asistio == false ||
                         (request.resource.data.estado == 'aceptada' &&
                          request.time >= resource.data.fechaInicio));
 
-      // No delete
       allow delete: if false;
     }
   }
