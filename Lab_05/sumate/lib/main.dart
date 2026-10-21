@@ -10,10 +10,18 @@ import 'firebase_options.dart';
 import 'features/auth/servicios/auth_service.dart';
 import 'features/perfil/servicios/usuario_service.dart';
 import 'pruebas/prueba_back.dart';
-
+import 'pruebas/seed_demo.dart';
 
 // Cambiar a true para usar los emuladores locales
-const bool usarEmulador = true;
+const bool usarEmulador = false;
+
+// Modo de siembra de datos de ejemplo (seed demo).
+// Para sembrar en la base de datos real de Firebase:
+// 1. Poner usarEmulador = false y modoSeed = true.
+// 2. Ejecutar la app (flutter run -d chrome).
+// 3. Pulsar el botón "Sembrar datos de demo" en la pantalla.
+// 4. Volver a dejar usarEmulador = true (o según se requiera) y modoSeed = false.
+const bool modoSeed = true;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +36,10 @@ Future<void> main() async {
     FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
   }
 
-  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: PruebaBackScreen()));
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: modoSeed ? const SeedDemoScreen() : const PruebaBackScreen(),
+  ));
 }
 
 /// Aplicación de prueba que recorre los pasos solicitados.
