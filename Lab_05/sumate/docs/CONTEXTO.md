@@ -231,6 +231,7 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 - No agregues funciones fuera de los requisitos sin preguntarme.
 - Escribe las reglas de seguridad de Firestore (`firestore.rules`) acordes al RNF04 antes de terminar el proyecto.
 - Datos de ejemplo (seed) para la demo: algunos eventos de distintas universidades.
+- Antigravity escribe el código; después de cada paso se verifica en disco (`ls`, `grep`) y con `flutter analyze` completo, no solo con su resumen. Antigravity no modifica `docs/CONTEXTO.md`.
 
 ## 13. Estado actual
 
@@ -243,14 +244,14 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 - [x] Firebase conectado (Auth + Firestore), verificado en Chrome
 - [x] Emulador de Firebase configurado (auth 9099, firestore 8080) y usado para probar
 
-### BACK (capa de datos, sin UI final)
-- [x] Paso 2: enums y modelos + tests (`lib/core/enums.dart`, `features/*/modelos/`)
-- [x] Paso 3: AuthService y UsuarioService (probado con emulador)
-- [x] Paso 4: EventoService y EdicionService + reglas de eventos y ediciones (probado con emulador)
-- [x] Paso 5: PostulacionService + reglas de postulaciones (implementado con pantalla de prueba)
-- [x] Paso 6: consolidar `firestore.rules`, índices y despliegue
-- [x] Paso 7: seed de datos de ejemplo (SeedDemoScreen)
-- [ ] Paso 8: pantalla de prueba final / revisión
+### BACK (capa de datos, sin UI final) ✅ completo
+- [x] Paso 2: enums y modelos + tests
+- [x] Paso 3: AuthService y UsuarioService
+- [x] Paso 4: EventoService y EdicionService + reglas
+- [x] Paso 5: PostulacionService + reglas de postulaciones
+- [x] Paso 6: reglas consolidadas, índices (ninguno compuesto necesario) y despliegue
+- [x] Paso 7: seed de demo (8 eventos, ejecutado en Firestore real)
+- [x] Paso 8: regresión completa en emulador (29 de 29)
 
 ### FRONT (UI)
 - [ ] Base: tema central, `responsive.dart`, `AppShell`
@@ -262,12 +263,13 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 
 ### Cierre
 - [ ] Probado en Android y web
-- [ ] Subido a GitHub (el código ya se sube por paso; falta la entrega final)
+- [ ] Entrega final subida a GitHub
 
 ### Pendientes técnicos anotados
-- Paso 6: en `eventos`, el `update` debe validarse contra `resource.data.administradores` (el paso 5 lo corrige; verificar).
+- Para la demo, `usarEmulador = false` apunta a la base real, que ya tiene reglas y seed desplegados. Las pantallas de prueba (`lib/pruebas/`) se eliminan al integrar la app real.
+- Tras el login, esperar a `authStateChanges` antes de consultar Firestore (lección de la regresión del paso 8).
 - `editar()` no puede borrar `beneficios` ni `enlaceExterno` una vez puestos (aceptable por ahora).
-- RF15: la colección `usuarios` es privada, así que asignar organizadores por correo necesitará un índice mínimo `correo → uid` (decidir al llegar a esa pantalla).
+- RF15: `usuarios` es privada, así que asignar organizadores por correo necesitará un índice mínimo `correo → uid` (decidir al llegar a esa pantalla).
 - El navegador muestra avisos rojos en modo debug (assertion de `viewInsets`, fuentes Noto); son del motor de Flutter web, no del código.
 
 *(Actualizar esta sección al terminar cada paso.)*
