@@ -10,8 +10,8 @@
 // - RNF07 (Privacidad): La colección 'usuarios' es estrictamente privada; cada usuario
 //   solo puede leer y actualizar su propio documento. Los organizadores de una edición
 //   únicamente tienen acceso al snapshot del perfil guardado en el documento de postulación.
-// - No se permite la eliminación de documentos (delete: if false) en ninguna colección
-//   para preservar la integridad histórica y la trazabilidad del sistema.
+// - No se permite borrar eventos, ediciones ni perfiles. El dueño sí puede
+//   borrar su propia postulación si aún es cancelable (ver reglas de postulaciones).
 
 rules_version = '2';
 service cloud.firestore {
@@ -100,6 +100,18 @@ service cloud.firestore {
                     && resource.data.asistentes.abierta == true
                     && existsAfter(/databases/$(database)/documents/postulaciones/$(id + '_' + request.auth.uid + '_asistente'));
 
+      // Update por postulante asistente al cancelar: solo -1 a ocupados (>= 0)
+      // en la misma transacción en que borra su postulación de asistente.
+      // exists comprueba que existía; existsAfter comprueba que ya no existe.
+      allow update: if autenticado()
+                    && !(request.auth.uid in resource.data.organizadores)
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['asistentes'])
+                    && request.resource.data.asistentes.diff(resource.data.asistentes).affectedKeys().hasOnly(['ocupados'])
+                    && request.resource.data.asistentes.ocupados == resource.data.asistentes.ocupados - 1
+                    && request.resource.data.asistentes.ocupados >= 0
+                    && exists(/databases/$(database)/documents/postulaciones/$(id + '_' + request.auth.uid + '_asistente'))
+                    && !existsAfter(/databases/$(database)/documents/postulaciones/$(id + '_' + request.auth.uid + '_asistente'));
+
       allow delete: if false;
     }
 
@@ -138,7 +150,15 @@ service cloud.firestore {
                         (request.resource.data.estado == 'aceptada' &&
                          request.time >= resource.data.fechaInicio));
 
-      allow delete: if false;
+      // Borrar: solo el dueño, sin asistencia, y según el rol.
+      // Voluntario: únicamente en espera. Asistente: solo antes de fechaInicio.
+      allow delete: if autenticado()
+                    && resource.data.usuarioId == request.auth.uid
+                    && resource.data.asistio == false
+                    && (
+                      (resource.data.rol == 'voluntario' && resource.data.estado == 'enviada')
+                      || (resource.data.rol == 'asistente' && request.time < resource.data.fechaInicio)
+                    );
     }
   }
 }

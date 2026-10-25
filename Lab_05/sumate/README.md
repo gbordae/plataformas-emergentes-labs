@@ -1,17 +1,46 @@
-# sumate
+# Súmate
 
-A new Flutter project.
+App multiplataforma (Android y web) que conecta organizadores, voluntarios y asistentes de eventos universitarios en Arequipa. Facilita convocatorias, postulaciones y constancias digitales de participación. No es bolsa de trabajo ni red social.
 
-## Getting Started
+## Stack
 
-This project is a starting point for a Flutter application.
+- Flutter (Dart) para Android y web
+- Firebase Authentication (correo y contraseña)
+- Cloud Firestore
+- Google Fonts (Plus Jakarta Sans)
 
-A few resources to get you started if this is your first Flutter project:
+## Cómo ejecutar
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```bash
+cd sumate
+flutter pub get
+flutter run -d chrome
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Cuenta de demo: `demo@sumate.pe` / `123456`
+
+La bandera `usarEmulador` en `lib/main.dart` está en `false`: la app usa el proyecto Firebase real (con el seed de demo ya desplegado). No hace falta el emulador local.
+
+## Estructura de carpetas
+
+```text
+lib/
+  main.dart                 # Entrada, Firebase y bandera de emulador
+  app/                      # AuthGate y navegación (AppShell)
+  core/                     # Tema, colores, enums, formato, widgets
+  features/
+    auth/                   # Login y registro
+    perfil/                 # Perfil del usuario
+    eventos/                # Explorar, publicar, mis eventos, detalle
+    postulaciones/          # Mis postulaciones, gestión, constancia
+```
+
+## Fuera de alcance (esta entrega)
+
+- Favoritos (RF12)
+- Recordatorios (RF13)
+- Código QR de asistencia (RF16)
+- Constancia en PDF (RF17)
+- Calificaciones de la experiencia (RF18)
+- Asignar organizadores (RF15)
+- Editar edición

@@ -122,18 +122,28 @@ class PostulacionService {
   /// El orden por fecha descendente se aplica en el cliente para evitar
   /// crear un índice compuesto innecesario.
   Future<List<Postulacion>> misPostulaciones(String uid) async {
-    final query = await _firestore
-        .collection('postulaciones')
-        .where('usuarioId', isEqualTo: uid)
-        .get();
+    final query = await _queryPorUsuario(uid).get();
+    return _ordenarPorFechaDesc(_mapear(query.docs));
+  }
 
-    final lista = query.docs
-        .map((d) => Postulacion.fromFirestore(d))
-        .toList();
+  /// Misma consulta que [misPostulaciones], en tiempo real con snapshots().
+  Stream<List<Postulacion>> escucharMisPostulaciones(String uid) {
+    return _queryPorUsuario(uid).snapshots().map(
+          (snap) => _ordenarPorFechaDesc(_mapear(snap.docs)),
+        );
+  }
 
-    // Orden descendente por fecha (más reciente primero)
-    lista.sort((a, b) => b.fecha.compareTo(a.fecha));
-    return lista;
+  // ── RF09: Contar postulaciones pendientes (en espera) ───────────────────
+  /// Devuelve el total de postulaciones en estado 'enviada' para una edición.
+  /// Cumple la regla de Firestore al filtrar por edicionId.
+  Future<int> contarPendientes(String edicionId) async {
+    final aggregateQuery = await _queryPendientes(edicionId).count().get();
+    return aggregateQuery.count ?? 0;
+  }
+
+  /// Conteo en vivo de postulaciones en espera (badge "por revisar").
+  Stream<int> escucharCantidadPendientes(String edicionId) {
+    return _queryPendientes(edicionId).snapshots().map((snap) => snap.docs.length);
   }
 
   // ── RF09: Postulantes de una edición ────────────────────────────────────
@@ -145,26 +155,23 @@ class PostulacionService {
     RolPostulacion? rol,
     EstadoPostulacion? estado,
   }) async {
-    final query = await _firestore
-        .collection('postulaciones')
-        .where('edicionId', isEqualTo: edicionId)
-        .get();
+    final query = await _queryPorEdicion(edicionId).get();
+    return _filtrarYOrdenarPostulantes(_mapear(query.docs), rol: rol, estado: estado);
+  }
 
-    var lista = query.docs
-        .map((d) => Postulacion.fromFirestore(d))
-        .toList();
-
-    // Filtros opcionales en el cliente
-    if (rol != null) {
-      lista = lista.where((p) => p.rol == rol).toList();
-    }
-    if (estado != null) {
-      lista = lista.where((p) => p.estado == estado).toList();
-    }
-
-    // Orden ascendente por fecha (primero los más antiguos)
-    lista.sort((a, b) => a.fecha.compareTo(b.fecha));
-    return lista;
+  /// Misma consulta que [postulantesDeEdicion], en tiempo real con snapshots().
+  Stream<List<Postulacion>> escucharPostulantesDeEdicion(
+    String edicionId, {
+    RolPostulacion? rol,
+    EstadoPostulacion? estado,
+  }) {
+    return _queryPorEdicion(edicionId).snapshots().map(
+          (snap) => _filtrarYOrdenarPostulantes(
+            _mapear(snap.docs),
+            rol: rol,
+            estado: estado,
+          ),
+        );
   }
 
   // ── RF09: Responder postulación (aceptar/rechazar) ──────────────────────
@@ -250,11 +257,122 @@ class PostulacionService {
     });
   }
 
+  // ── Cancelar postulación (dueño) ────────────────────────────────────────
+  /// Borra la postulación del dueño si las reglas de negocio lo permiten.
+  /// Voluntario: solo estado enviada y sin asistencia (no toca cupos).
+  /// Asistente: solo si el evento no ha empezado; resta 1 a ocupados en la
+  /// misma transacción. El id determinista queda libre para volver a postular.
+  Future<void> cancelar(String postulacionId, String uid) async {
+    final postRef = _firestore.collection('postulaciones').doc(postulacionId);
+
+    await _firestore.runTransaction((tx) async {
+      final postSnap = await tx.get(postRef);
+      if (!postSnap.exists) {
+        throw ErrorNegocio('Postulación no encontrada');
+      }
+
+      final post = Postulacion.fromFirestore(postSnap);
+
+      if (post.usuarioId != uid) {
+        throw ErrorNegocio('No puedes cancelar esta postulación');
+      }
+      if (post.asistio) {
+        throw ErrorNegocio('Ya se registró tu asistencia');
+      }
+
+      if (post.rol == RolPostulacion.voluntario) {
+        if (post.estado == EstadoPostulacion.aceptada) {
+          throw ErrorNegocio(
+            'Tu postulación ya fue aceptada; contacta al organizador para cancelarla',
+          );
+        }
+        if (post.estado != EstadoPostulacion.enviada) {
+          throw ErrorNegocio('No se puede cancelar una postulación rechazada');
+        }
+      } else {
+        // Asistente: no se puede cancelar si el evento ya comenzó.
+        if (!DateTime.now().isBefore(post.fechaInicio)) {
+          throw ErrorNegocio('El evento ya comenzó');
+        }
+
+        final edicionRef =
+            _firestore.collection('ediciones').doc(post.edicionId);
+        final edicionSnap = await tx.get(edicionRef);
+        if (!edicionSnap.exists) {
+          throw ErrorNegocio('Edición no encontrada');
+        }
+        final edicion = Edicion.fromFirestore(edicionSnap);
+        // No bajar ocupados por debajo de 0 si los datos estuvieran inconsistentes.
+        if (edicion.asistentes.ocupados > 0) {
+          tx.update(edicionRef, {
+            'asistentes.ocupados': FieldValue.increment(-1),
+          });
+        }
+      }
+
+      tx.delete(postRef);
+    });
+  }
+
   // ── RF11: Historial de participaciones ──────────────────────────────────
   /// Reutiliza misPostulaciones y filtra en el cliente por asistio == true.
   /// Ordena por fechaInicio descendente (los eventos más recientes primero).
   Future<List<Postulacion>> historial(String uid) async {
-    final todas = await misPostulaciones(uid);
+    return _aHistorial(await misPostulaciones(uid));
+  }
+
+  /// Historial en vivo: misma consulta por usuarioId, filtro asistio en el cliente.
+  Stream<List<Postulacion>> escucharHistorial(String uid) {
+    return escucharMisPostulaciones(uid).map(_aHistorial);
+  }
+
+  // ── Consultas y mapeos compartidos (un solo where, sin orderBy) ─────────
+
+  Query<Map<String, dynamic>> _queryPorUsuario(String uid) {
+    return _firestore
+        .collection('postulaciones')
+        .where('usuarioId', isEqualTo: uid);
+  }
+
+  Query<Map<String, dynamic>> _queryPorEdicion(String edicionId) {
+    return _firestore
+        .collection('postulaciones')
+        .where('edicionId', isEqualTo: edicionId);
+  }
+
+  Query<Map<String, dynamic>> _queryPendientes(String edicionId) {
+    return _firestore
+        .collection('postulaciones')
+        .where('edicionId', isEqualTo: edicionId)
+        .where('estado', isEqualTo: EstadoPostulacion.enviada.name);
+  }
+
+  List<Postulacion> _mapear(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
+    return docs.map(Postulacion.fromFirestore).toList();
+  }
+
+  List<Postulacion> _ordenarPorFechaDesc(List<Postulacion> lista) {
+    lista.sort((a, b) => b.fecha.compareTo(a.fecha));
+    return lista;
+  }
+
+  List<Postulacion> _filtrarYOrdenarPostulantes(
+    List<Postulacion> lista, {
+    RolPostulacion? rol,
+    EstadoPostulacion? estado,
+  }) {
+    var filtrada = lista;
+    if (rol != null) {
+      filtrada = filtrada.where((p) => p.rol == rol).toList();
+    }
+    if (estado != null) {
+      filtrada = filtrada.where((p) => p.estado == estado).toList();
+    }
+    filtrada.sort((a, b) => a.fecha.compareTo(b.fecha));
+    return filtrada;
+  }
+
+  List<Postulacion> _aHistorial(List<Postulacion> todas) {
     final participaciones = todas.where((p) => p.asistio).toList();
     participaciones.sort((a, b) => b.fechaInicio.compareTo(a.fechaInicio));
     return participaciones;

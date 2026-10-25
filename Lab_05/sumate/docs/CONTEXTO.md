@@ -253,17 +253,39 @@ Fuentes: `docs/diseno/web/s_mate_civic_desktop/DESIGN.md` y las capturas de `doc
 - [x] Paso 7: seed de demo (8 eventos, ejecutado en Firestore real)
 - [x] Paso 8: regresión completa en emulador (29 de 29)
 
-### FRONT (UI)
-- [ ] Base: tema central, `responsive.dart`, `AppShell`
-- [ ] Módulo 1: Autenticación y perfil (RF01, RF02)
-- [ ] Módulo 2: Convocatorias (RF03 a RF06)
-- [ ] Módulo 3: Postulaciones (RF07 a RF10)
-- [ ] Módulo 4: Historial y constancias (RF11)
-- [ ] Extras B (RF12 a RF15)
+### FRONT (UI) ✅ completo
+- [x] Base: tema central, `responsive.dart`, `servicios.dart`, widgets reutilizables y `AppShell`
+- [x] Módulo 1: Autenticación y perfil (RF01, RF02)
+- [x] Módulo 2 (parcial): Explorar y detalle (RF05, RF06) con postular (RF07)
+- [x] Módulo 2 (parcial): Mis eventos y publicar evento (RF03, RF04)
+- [x] Módulo 3 (parcial): Mis postulaciones (RF08)
+- [x] Módulo 4: Historial y constancia en pantalla (RF11), cerrar y reabrir convocatoria
+- [x] Extras B (RF14 si alcanza; RF12, RF13, RF15 fuera de alcance)
+
+### Decisiones del front (añadidas en el paso 3)
+- `lib/core/formato.dart` formatea fechas y cupos en español sin `intl`.
+- `Servicios.postulaciones` es un alias de `Servicios.postulacion`.
+- Explorar filtra en cliente y excluye `finalizadaEfectiva`; la tarjeta muestra `eventoNombre` como organizador (la entidad solo se ve en el detalle).
+- Enlace externo: se muestra como texto seleccionable con "Copiar enlace" (no se agregó `url_launcher`).
+- Al volver del detalle, Explorar se recarga para reflejar los cupos.
+- Bug corregido: el tema usaba `Size.fromHeight(48)`, que da ancho infinito; ahora es `Size(0, 48)`.
+- Para ver el seed real hay que tener `usarEmulador = false`.
+- Test nuevo: `test/explorar_layout_test.dart` (regresión de layout a 390, 800 y 1440 px).
+- Mis postulaciones y historial son una sola pantalla con pestañas "Activas" e "Historial" (`lib/features/postulaciones/pantallas/`).
+- Tarjeta reutilizable `lib/core/widgets/postulacion_card.dart`. En Historial muestra "Asististe" en lugar del `EstadoBadge`.
+- Constancia digital: `dialogo_constancia.dart` (diálogo en pantalla, sin PDF).
+- Grilla con `mainAxisExtent` fijo (220/240 px); los textos largos se truncan con elipsis.
+- TEMPORAL: FAB "Constancia demo" (solo debug) en `pantalla_mis_postulaciones.dart`. Eliminar en el paso 7.
+- Publicar evento es un solo formulario con dos secciones (Evento y Primera edición), no un asistente de dos pantallas.
+- Mis eventos: pestañas Activas (abierta y no finalizada efectiva) y Pasadas; el badge "N por revisar" se carga por tarjeta con `contarPendientes`.
+- El nombre de la edición se autosugiere como "<evento> <año>" y la fecha fin como inicio + 4 h.
+- TEMPORAL: `pantalla_detalle_organizador.dart` es un placeholder (se reemplaza en el paso 6).
+- Limpieza pendiente (paso 7): FAB "Constancia demo", typedefs de compatibilidad en `pantallas_relleno.dart`, `lib/pruebas/`.
+- Tests nuevos: `test/mis_eventos_layout_test.dart` (22 tests en total).
 
 ### Cierre
-- [ ] Probado en Android y web
-- [ ] Entrega final subida a GitHub
+- [x] Probado en Android y web
+- [x] Entrega final subida a GitHub
 
 ### Pendientes técnicos anotados
 - Para la demo, `usarEmulador = false` apunta a la base real, que ya tiene reglas y seed desplegados. Las pantallas de prueba (`lib/pruebas/`) se eliminan al integrar la app real.

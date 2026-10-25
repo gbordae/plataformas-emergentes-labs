@@ -25,6 +25,44 @@ class EdicionService {
     return Edicion.fromFirestore(doc);
   }
 
+  /// Lista convocatorias de ediciones abiertas para el catálogo general (Explorar).
+  ///
+  /// Filtra en Firestore por `estado == 'abierta'`.
+  /// Los filtros de [tipo], [universidad], [modalidad] y [fechaDesde] se aplican
+  /// en el cliente para no exigir índices compuestos múltiples en Firestore.
+  /// Ordena por `fechaInicio` ascendente.
+  Future<List<Edicion>> listarAbiertas({
+    TipoEvento? tipo,
+    String? universidad,
+    Modalidad? modalidad,
+    DateTime? fechaDesde,
+  }) async {
+    final query = await _firestore
+        .collection('ediciones')
+        .where('estado', isEqualTo: EstadoEdicion.abierta.name)
+        .get();
+
+    var lista = query.docs.map((d) => Edicion.fromFirestore(d)).toList();
+
+    // Filtros en cliente (sin exigir índices compuestos)
+    if (tipo != null) {
+      lista = lista.where((e) => e.tipo == tipo).toList();
+    }
+    if (universidad != null && universidad.isNotEmpty) {
+      lista = lista.where((e) => e.universidad.toLowerCase() == universidad.toLowerCase()).toList();
+    }
+    if (modalidad != null) {
+      lista = lista.where((e) => e.modalidad == modalidad).toList();
+    }
+    if (fechaDesde != null) {
+      lista = lista.where((e) => e.fechaInicio.isAfter(fechaDesde) || e.fechaInicio.isAtSameMomentAs(fechaDesde)).toList();
+    }
+
+    // Orden ascendente por fecha de inicio (más próximas primero)
+    lista.sort((a, b) => a.fechaInicio.compareTo(b.fechaInicio));
+    return lista;
+  }
+
   Future<List<Edicion>> misEdicionesAbiertas(String uid) async {
     final query = await _firestore
         .collection('ediciones')

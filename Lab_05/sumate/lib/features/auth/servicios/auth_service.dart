@@ -82,6 +82,15 @@ class AuthService {
   /// Cierra la sesión actual.
   Future<void> cerrarSesion() async => await _auth.signOut();
 
+  /// Envía un correo electrónico para recuperar la contraseña.
+  Future<void> enviarRecuperacionContrasena(String correo) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: correo);
+    } on FirebaseAuthException catch (e) {
+      throw AuthError(_mapFirebaseError(e));
+    }
+  }
+
   /// Traduce los códigos de error de FirebaseAuth a mensajes legibles.
   String _mapFirebaseError(FirebaseAuthException e) {
     switch (e.code) {
